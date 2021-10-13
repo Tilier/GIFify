@@ -18,11 +18,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
-app.get('/api/createaccount', function (req, res) {
+/* app.get('/api/createaccount', function (req, res) {
   console.log(req.headers)
   if (req.headers.password == process.env['APIPASSWORD']) {
-    // create account
   }
-})
+}) */
 
 module.exports = app;
