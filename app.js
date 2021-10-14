@@ -9,6 +9,13 @@ var quotesRouter = require('./routes/quotes');
 
 var app = express();
 
+var con = mysql.createConnection({
+	host     : 'remotemysql.com',
+	user     : '6OcHtB5ESO',
+	password : process.env["SQLPASSWORD"],
+	database : '6OcHtB5ESO'
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,7 +26,14 @@ app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
 app.get('/api/createaccount', function (req, res) {
-  console.log(process.env['APIPASSWORD'])
+  con.connect(function(err) {
+    if (err) throw err;
+    var sql = `INSERT INTO users (username, password) VALUES ('${uername}, '$password')`
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
+});
   if (req.headers.password == process.env['APIPASSWORD']) {
     res.send(`account created with username ${req.headers.username}!`)
   } else {
