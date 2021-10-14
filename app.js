@@ -19,6 +19,7 @@ app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
 app.get('/api/createaccount', function (req, res) {
+  console.log(process.env['APIPASSWORD'])
   if (req.headers.password == process.env['APIPASSWORD']) {
     res.send(`account created with username ${req.headers.username}!`)
   } else {
