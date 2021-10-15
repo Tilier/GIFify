@@ -26,17 +26,16 @@ app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
 app.get('/api/createaccount', function (req, res) {
-  if (req.headers.password == process.env['APIPASSWORD']) {
+  if (req.headers.apipassword == process.env['APIPASSWORD']) {
     let result = null;
     con.connect(function(err) {
       if (err) throw err;
-      // INSERT INTO users (username, password) VALUES ('${req.headers.username}, '${req.headers.username}');
       let sql = `SELECT * FROM accounts WHERE username = ${req.headers.username}`
       con.query(sql, function (err, result) {
         if (req.headers.username == result) {
           res.send('this username already exists. choose a new one!')
         } else {
-          let sql2 = `INSERT INTO users (username, password) VALUES ('${req.headers.username}, '${req.headers.username}')`
+          let sql2 = `INSERT INTO users (username, password) VALUES ('${req.headers.username}, '${req.headers.password}')`
           con.query(sql, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
