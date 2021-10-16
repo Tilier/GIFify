@@ -29,7 +29,7 @@ app.post('/api/createaccount', function (req, res) {
     let result = null;
     con.connect(function(err) {
       if (err) throw err;
-      let sql = `SELECT * FROM users WHERE username = ${req.body.username}`
+      let sql = `SELECT username FROM users WHERE username = ${req.body.username}`
       con.query(sql, function (err, result) {
         if (err) throw err;
         if (req.body.username == result) {
