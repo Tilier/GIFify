@@ -4,7 +4,7 @@
   <meta charset=utf-8>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GIFify</title>
-  <link rel="stylesheet" href="https://static.begin.app/starter/default.css">
+  <link rel="stylesheet" href="./style.css">
   <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
 </head>
 <body>
@@ -15,12 +15,12 @@
     <form action="api/auth" method="POST">
       <input type="text" name="username" placeholder="username" required>
       <input type="text" name="password" placeholder="password" required>
-      <input type="submit">sign in</input>
+      <input type="submit" name="sign in">
     </form>
     <form action="api/createaccount" method="POST">
       <input type="text" name="username" placeholder="enter your desired username." required>
       <input type="text" name="password" placeholder="enter your desired password." required>
-      <input type="submit">
+      <input type="submit" name="sign up">
     </form>
   </div>
     
