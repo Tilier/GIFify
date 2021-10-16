@@ -13,7 +13,11 @@
   </div>
   <div class="fulllength signin">
     <button>sign in</button>
-    <button onclick="makeAccount('Tilier', 'banana')">create account</button>
+    <form action="api/createaccount" method="POST">
+      <input type="text" name="username" placeholder="enter your desired username." required>
+      <input type="text" name="password" placeholder="enter your desired password." required>
+      <input type="submit">
+    </form>
   </div>
     
   <script type="module" src="index.js"></script>
