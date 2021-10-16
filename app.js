@@ -38,7 +38,7 @@ app.post('/api/createaccount', function (req, res) {
           con.query(sql, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
-            res.send(`account created with username ${req.body.username}! ${result}`)
+            res.send(`account created with username ${req.body.username}! result: ${result}!`)
           });
         }
         if (err) throw err;
