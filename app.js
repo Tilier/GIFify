@@ -26,7 +26,6 @@ app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
 app.post('/api/createaccount', function (req, res) {
-    con.connect(function(err) {
       if (err) throw err;
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
       con.query(sql, function (err, result) {
@@ -44,7 +43,6 @@ app.post('/api/createaccount', function (req, res) {
         }
         if (err) throw err;
       });
-    });
 })
 
 module.exports = app;
