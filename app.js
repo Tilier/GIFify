@@ -33,7 +33,6 @@ con.connect((err) => {
 app.post('/api/createaccount', function (req, res) {
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
       con.query(sql, function (err, result) {
-        console.log(result)
         if (err) throw err;
         if (result.length > 0) {
           res.send('this username already exists. choose a new one!')
@@ -46,6 +45,18 @@ app.post('/api/createaccount', function (req, res) {
           });
         }
       });
+})
+
+app.post('/api/auth', function (req, res) {
+  let sql = `SELECT username FROM users WHERE username = '${req.body.username}' and password = '${req.body.password}'`
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    if (result.length > 0) {
+      res.send('successfully logged in!')
+    } else {
+      res.send('incorrect username or password.')
+    }
+  })
 })
 
 module.exports = app;
