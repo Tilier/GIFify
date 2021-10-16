@@ -26,7 +26,6 @@ app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
 app.post('/api/createaccount', function (req, res) {
-    let result = null;
     con.connect(function(err) {
       if (err) throw err;
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
@@ -39,7 +38,7 @@ app.post('/api/createaccount', function (req, res) {
           con.query(sql, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
-            res.send(`account created with username ${req.body.username}!`)
+            res.send(`account created with username ${req.body.username}! ${result}`)
           });
         }
         if (err) throw err;
