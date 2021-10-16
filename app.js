@@ -30,6 +30,7 @@ app.post('/api/createaccount', function (req, res) {
     con.connect(function(err) {
       if (err) throw err;
       let sql = `SELECT * FROM users WHERE username = ${req.body.username}`
+      try {
       con.query(sql, function (err, result) {
         if (req.body.username == result) {
           res.send('this username already exists. choose a new one!')
@@ -43,6 +44,9 @@ app.post('/api/createaccount', function (req, res) {
         }
         if (err) throw err;
       });
+      } catch (e) {
+        res.send('this username already exists. choose a new one!')
+      }
     });
 })
 
