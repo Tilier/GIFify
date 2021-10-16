@@ -35,7 +35,7 @@ app.post('/api/createaccount', function (req, res) {
           res.send('this username already exists. choose a new one!')
         } else {
           let sql2 = `INSERT INTO users (username, password) VALUES ('${req.body.username}, '${req.body.password}')`
-          con.query(sql, function (err, result) {
+          con.query(sql2, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
             res.send(`account created with username ${req.body.username}! result: ${result}!`)
