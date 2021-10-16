@@ -30,6 +30,7 @@ app.post('/api/createaccount', function (req, res) {
       if (err) throw err;
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
       con.query(sql, function (err, result) {
+        console.log(result)
         if (err) throw err;
         if (req.body.username == result) {
           res.send('this username already exists. choose a new one!')
