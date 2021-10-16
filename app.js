@@ -25,8 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
+con.connect((err) => {
+    if(err) throw err;
+    console.log('Connected to MySQL Server!');
+});
+
 app.post('/api/createaccount', function (req, res) {
-      if (err) throw err;
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
       con.query(sql, function (err, result) {
         console.log(result)
@@ -41,7 +45,6 @@ app.post('/api/createaccount', function (req, res) {
             res.send(`account created with username ${req.body.username}! result: ${result}!`)
           });
         }
-        if (err) throw err;
       });
 })
 
