@@ -12,7 +12,11 @@
     
   </div>
   <div class="fulllength signin">
-    <button>sign in</button>
+    <form action="api/auth" method="POST">
+      <input type="text" name="username" placeholder="username" required>
+      <input type="text" name="password" placeholder="password" required>
+      <input type="submit">sign in</input>
+    </form>
     <form action="api/createaccount" method="POST">
       <input type="text" name="username" placeholder="enter your desired username." required>
       <input type="text" name="password" placeholder="enter your desired password." required>
