@@ -16,14 +16,14 @@ var con = mysql.createConnection({
 	database : '6OcHtB5ESO'
 });
 
-app.use(logger('dev'));
+/* app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); */
 
 // app.use('/', indexRouter);
-app.use('/quotes', quotesRouter);
+// app.use('/quotes', quotesRouter);
 
 con.connect((err) => {
     if(err) throw err;
