@@ -31,11 +31,12 @@ con.connect((err) => {
 });
 
 app.get('/', function (req, res) {
-  if (req.session.loggedin === "a7d0qp") {
+  console.log(typeof req.session.loggedin)
+  /* if (req.session.loggedin === "a7d0qp") {
     res.sendFile(__dirname + '/public/index.html')
   } else {
     res.sendFile(__dirname + '/public/signup.html')
-  }
+  } */
 })
 
 app.post('/api/createaccount', function (req, res) {
