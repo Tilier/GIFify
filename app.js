@@ -31,7 +31,7 @@ con.connect((err) => {
 });
 
 app.get('/', function (req, res) {
-  console.log(typeof req.session.loggedin)
+  res.send(typeof req.session.loggedin)
   /* if (req.session.loggedin === "a7d0qp") {
     res.sendFile(__dirname + '/public/index.html')
   } else {
