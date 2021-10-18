@@ -50,7 +50,9 @@ app.post('/api/createaccount', function (req, res) {
           con.query(sql2, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
-            res.send(`account created with username ${req.body.username}! result: ${result}!`)
+            res.send(`account created with username ${req.body.username}!`)
+            req.session.loggenin = "a7d0qp"
+            res.redirect('/')
           });
         }
       });
