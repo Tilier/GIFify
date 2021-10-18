@@ -72,9 +72,9 @@ app.post('/api/auth', function (req, res) {
 })
 
 // custom 500?
-app.use(function (error, req, res, next) {
+/* app.use(function (error, req, res, next) {
     res.send('oops! an internal server error occured. please try again.', 500);
     console.log(error);
-});
+}); */
 
 module.exports = app;
