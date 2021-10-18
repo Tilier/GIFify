@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 
 con.connect((err) => {
@@ -30,8 +30,17 @@ con.connect((err) => {
     console.log('Connected to MySQL Server!');
 });
 
+app.get('/', function (req, res) {
+  if (req.session.loggedin == true) {
+    res.sendFile('./public/index.html')
+  } else {
+    res.sendFile('./public/signup.html')
+  }
+})
+
 app.post('/api/createaccount', function (req, res) {
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
+      try {
       con.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length > 0) {
@@ -45,6 +54,9 @@ app.post('/api/createaccount', function (req, res) {
           });
         }
       });
+      } catch (e) {
+        res.send('an error occured.')
+      }
 })
 
 app.post('/api/auth', function (req, res) {
@@ -59,7 +71,7 @@ app.post('/api/auth', function (req, res) {
   })
 })
 
-// custom 500
+// custom 500?
 app.use(function (error, req, res, next) {
     res.send('oops! an internal server error occured. please try again.', 500);
     console.log(error);
