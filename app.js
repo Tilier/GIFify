@@ -31,7 +31,7 @@ con.connect((err) => {
 });
 
 app.get('/', function (req, res) {
-  res.sendFile('./public/signup.html')
+  res.send('./public/signup.html')
 })
 
 app.post('/api/createaccount', function (req, res) {
