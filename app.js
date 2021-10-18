@@ -32,7 +32,7 @@ con.connect((err) => {
 
 app.get('/', function (req, res) {
   if (req.session.loggedin == true) {
-    res.sendFile('./public/index.html')
+    res.sendFile('./public/signup.html')
   } else {
     res.sendFile('./public/signup.html')
   }
