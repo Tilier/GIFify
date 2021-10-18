@@ -31,11 +31,7 @@ con.connect((err) => {
 });
 
 app.get('/', function (req, res) {
-  if (req.session.loggedin == true) {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'))
-  } else {
-    res.sendFile(path.join(__dirname, '../public', 'signup.html'))
-  }
+  res.sendFile(path.join(__dirname, '../public', 'signup.html'))
 })
 
 app.post('/api/createaccount', function (req, res) {
