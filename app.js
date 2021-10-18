@@ -31,7 +31,11 @@ con.connect((err) => {
 });
 
 app.get('/', function (req, res) {
-  res.send(typeof req.session.loggedin)
+  try {
+    res.send(typeof req.session.loggedin)
+  } catch (e) {
+    res.send('error!')
+  }
 })
 
 app.post('/api/createaccount', function (req, res) {
