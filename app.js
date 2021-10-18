@@ -4,8 +4,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql')
 
-var indexRouter = require('./routes/index');
-var quotesRouter = require('./routes/quotes');
+// var indexRouter = require('./routes/index');
+// var quotesRouter = require('./routes/quotes');
 
 var app = express();
 
@@ -32,11 +32,6 @@ con.connect((err) => {
 
 app.get('/', function (req, res) {
   res.send(typeof req.session.loggedin)
-  /* if (req.session.loggedin === "a7d0qp") {
-    res.sendFile(__dirname + '/public/index.html')
-  } else {
-    res.sendFile(__dirname + '/public/signup.html')
-  } */
 })
 
 app.post('/api/createaccount', function (req, res) {
