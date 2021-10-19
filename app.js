@@ -3,7 +3,7 @@ var path = require('path');
 var bodyParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql')
-var session = require('express-session')
+var session = require('cookie-session')
 
 // var indexRouter = require('./routes/index');
 // var quotesRouter = require('./routes/quotes');
@@ -29,11 +29,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); */
 
+app.set('trust proxy', 1) // trust first proxy
+ 
 app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
