@@ -32,7 +32,7 @@ con.connect((err) => {
 
 app.get('/', function (req, res) {
   try {
-    res.send(String(typeof req.session.loggedin))
+    let thisdoesntmatter = typeof req.session.loggedin
   } catch (e) {
     res.send('error!')
   }
