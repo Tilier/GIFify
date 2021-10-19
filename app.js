@@ -55,13 +55,15 @@ app.post('/api/createaccount', function (req, res) {
             if (err) throw err;
             console.log("1 record inserted");
             res.send(`account created with username ${req.body.username}!`)
-            req.session.loggenin = "a7d0qp"
+            req.session.accountusername = `${res.body.username}`
+            req.session.accountpassword = `${res.body.password}`
+            req.session.loggedin = true
             res.redirect('/')
           });
         }
       });
       } catch (e) {
-        res.send('an error occured.')
+        res.send('an error occured. please try again.')
       }
 })
 
