@@ -18,7 +18,7 @@ var con = mysql.createConnection({
 });
 
 app.use(session({
-	secret: 'secret',
+	secret: 'g8sdaf9sf0ms',
 	resave: true,
 	saveUninitialized: true
 }));
@@ -38,13 +38,9 @@ con.connect((err) => {
 });
 
 app.get('/', function (req, res) {
-  try {
-    // does the cookie exist?
-    let thisdoesntmatter = typeof req.session.loggedin
-    // then send the home page
-    res.sendFile(__dirname + '/public/home.html')
-  } catch (e) {
-    // if it doesn't, log in!
+  if (req.session.loggedin == true) {
+    res.sendFile(__dirname + '/public/index.hml')
+  } else {
     res.sendFile(__dirname + '/public/signup.html')
   }
 })
