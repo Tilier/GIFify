@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var bodyParser = require('cookie-parser');
+var dooki3Parser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql')
 var session = require('cookie-session')
@@ -21,13 +21,7 @@ var con = mysql.createConnection({
 	secret: 'g8sdaf9sf0ms',
 	resave: true,
 	saveUninitialized: true
-}));
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public'))); */
+})); */
 
 app.set('trust proxy', 1) // trust first proxy
  
@@ -36,8 +30,11 @@ app.use(session({
   keys: ['key1', 'key2']
 }))
 
-app.use(bodyParser.urlencoded({extended : true}));
-app.use(bodyParser.json());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 // app.use('/quotes', quotesRouter);
