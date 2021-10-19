@@ -46,7 +46,7 @@ con.connect((err) => {
 
 app.get('/', function (req, res) {
   if (req.session.loggedin == true) {
-    res.sendFile(__dirname + '/public/index.hmtl')
+    res.sendFile(__dirname + '/public/index.html')
   } else {
     res.sendFile(__dirname + '/public/signup.html')
   }
