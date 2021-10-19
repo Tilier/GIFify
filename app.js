@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var bodyParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql')
 var session = require('cookie-session')
@@ -17,7 +17,7 @@ var con = mysql.createConnection({
 	database : '6OcHtB5ESO'
 });
 
-app.use(session({
+/* app.use(session({
 	secret: 'g8sdaf9sf0ms',
 	resave: true,
 	saveUninitialized: true
@@ -27,7 +27,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); */
+
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 
 // app.use('/', indexRouter);
 // app.use('/quotes', quotesRouter);
