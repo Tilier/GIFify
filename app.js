@@ -55,8 +55,8 @@ app.post('/api/createaccount', function (req, res) {
             if (err) throw err;
             console.log("1 record inserted");
             res.send(`account created with username ${req.body.username}!`)
-            req.session.accountusername = `${res.body.username}`
-            req.session.accountpassword = `${res.body.password}`
+            req.session.accountusername = `${req.body.username}`
+            req.session.accountpassword = `${req.body.password}`
             req.session.loggedin = true
             res.redirect('/')
           });
