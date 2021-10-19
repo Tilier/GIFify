@@ -3,7 +3,7 @@ var path = require('path');
 var bodyParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql')
-var session = require('cookie-session')
+var session = require('express-session')
 
 // var indexRouter = require('./routes/index');
 // var quotesRouter = require('./routes/quotes');
