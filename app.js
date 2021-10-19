@@ -32,9 +32,13 @@ con.connect((err) => {
 
 app.get('/', function (req, res) {
   try {
+    // does the cookie exist?
     let thisdoesntmatter = typeof req.session.loggedin
+    // then send the home page
+    res.sendFile(__dirname + '/public/home.html')
   } catch (e) {
-    res.send('error!')
+    // if it doesn't, log in!
+    res.sendFile(__dirname + '/public/signup.html')
   }
 })
 
