@@ -64,7 +64,7 @@ app.post('/api/createaccount', function (req, res, next) {
           con.query(sql2, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
-            res.send(`account created with username ${req.body.username}!`)
+            // res.send(`account created with username ${req.body.username}!`)
             req.session.accountusername = `${req.body.username}`
             req.session.accountpassword = `${req.body.password}`
             req.session.loggedin = true
