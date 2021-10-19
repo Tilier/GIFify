@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var dooki3Parser = require('cookie-parser');
+var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql')
 var session = require('cookie-session')
