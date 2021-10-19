@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
   }
 })
 
-app.post('/api/createaccount', function (req, res) {
+app.post('/api/createaccount', function (req, res, next) {
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
       try {
       con.query(sql, function (err, result) {
@@ -69,6 +69,8 @@ app.post('/api/createaccount', function (req, res) {
             req.session.accountpassword = `${req.body.password}`
             req.session.loggedin = true
             res.redirect('/')
+            
+            next();
           });
         }
       });
