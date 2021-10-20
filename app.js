@@ -95,6 +95,12 @@ app.post('/api/auth', function (req, res, next) {
   })
 })
 
+app.get('/api/signout', function (req, res, next) {
+  req.session.accountusername = null
+  req.session.accountpassword = null
+  req.session.loggedin = null
+})
+
 // custom 500?
 /* app.use(function (error, req, res, next) {
     res.send('oops! an internal server error occured. please try again.', 500);
