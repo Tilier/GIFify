@@ -99,6 +99,9 @@ app.get('/api/signout', function (req, res, next) {
   req.session.accountusername = null
   req.session.accountpassword = null
   req.session.loggedin = null
+  res.redirect('/')
+  
+  next();
 })
 
 // custom 500?
