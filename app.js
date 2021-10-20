@@ -84,6 +84,9 @@ app.post('/api/auth', function (req, res, next) {
   con.query(sql, function (err, result) {
     if (err) throw err;
     if (result.length > 0) {
+                req.session.accountusername = `${req.body.username}`
+            req.session.accountpassword = `${req.body.password}`
+            req.session.loggedin = true
       res.redirect('/')
       next();
     } else {
