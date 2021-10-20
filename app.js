@@ -79,12 +79,13 @@ app.post('/api/createaccount', function (req, res, next) {
       }
 })
 
-app.post('/api/auth', function (req, res) {
+app.post('/api/auth', function (req, res, next) {
   let sql = `SELECT username FROM users WHERE username = '${req.body.username}' and password = '${req.body.password}'`
   con.query(sql, function (err, result) {
     if (err) throw err;
     if (result.length > 0) {
-      res.send('successfully logged in!')
+      res.redirect('/')
+      next();
     } else {
       res.send('incorrect username or password.')
     }
