@@ -116,7 +116,7 @@ app.post('/api/auth', function (req, res, next) {
 })
 
 app.post('/api/requestfriend', function (req, res, next) {
-      let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
+      let sql = `SELECT username FROM users WHERE username = '${req.body.receiver}'`
       try {
       connection.query(sql, function (err, result) {
         if (err) throw err;
