@@ -123,7 +123,7 @@ app.post('/api/requestfriend', function (req, res, next) {
         if (result.length > 0) {
           res.send('this username already exists. choose a new one!')
           let sql2 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.username}', '${req.body.receiver}')`
-          con.query(sql2, function (err, result) {
+          connection.query(sql2, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
             res.redirect('/')
