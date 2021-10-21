@@ -10,12 +10,37 @@ var session = require('cookie-session')
 
 var app = express();
 
-var con = mysql.createConnection({
+var db_config = {
 	host     : 'remotemysql.com',
 	user     : '6OcHtB5ESO',
 	password : process.env["SQLPASSWORD"],
 	database : '6OcHtB5ESO'
-});
+};
+
+var connection;
+
+function handleDisconnect() {
+  connection = mysql.createConnection(db_config); // Recreate the connection, since
+                                                  // the old one cannot be reused.
+
+  connection.connect(function(err) {              // The server is either down
+    if(err) {                                     // or restarting (takes a while sometimes).
+      console.log('error when connecting to db:', err);
+      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+    }                                     // to avoid a hot loop, and to allow our node script to
+  });                                     // process asynchronous requests in the meantime.
+                                          // If you're also serving http, display a 503 error.
+  connection.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+      handleDisconnect();                         // lost due to either server restart, or a
+    } else {                                      // connnection idle timeout (the wait_timeout
+      throw err;                                  // server variable configures this)
+    }
+  });
+}
+
+handleDisconnect();
 
 /* app.use(session({
 	secret: 'g8sdaf9sf0ms',
@@ -38,11 +63,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 // app.use('/quotes', quotesRouter);
-
-con.connect((err) => {
-    if(err) throw err;
-    console.log('Connected to MySQL Server!');
-});
 
 app.get('/', function (req, res) {
   if (req.session.loggedin == true) {
@@ -93,6 +113,30 @@ app.post('/api/auth', function (req, res, next) {
       res.send('incorrect username or password.')
     }
   })
+})
+
+app.post('/api/requestfriend', function (req, res, next) {
+      let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
+      try {
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        if (result.length > 0) {
+          res.send('this username already exists. choose a new one!')
+          let sql2 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.username}', '${req.body.receiver}')`
+          con.query(sql2, function (err, result) {
+            if (err) throw err;
+            console.log("1 record inserted");
+            res.redirect('/')
+            
+            next();
+          });
+        } else {
+          res.send('invalid username.')
+        }
+      });
+      } catch (e) {
+        res.send('an error occured. please try again.')
+      }
 })
 
 app.get('/api/signout', function (req, res, next) {
