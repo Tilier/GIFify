@@ -75,13 +75,13 @@ app.get('/', function (req, res) {
 app.post('/api/createaccount', function (req, res, next) {
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
       try {
-      con.query(sql, function (err, result) {
+      connection.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length > 0) {
           res.send('this username already exists. choose a new one!')
         } else {
           let sql2 = `INSERT INTO users (username, password) VALUES ('${req.body.username}', '${req.body.password}')`
-          con.query(sql2, function (err, result) {
+          connection.query(sql2, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
             // res.send(`account created with username ${req.body.username}!`)
@@ -101,7 +101,7 @@ app.post('/api/createaccount', function (req, res, next) {
 
 app.post('/api/auth', function (req, res, next) {
   let sql = `SELECT username FROM users WHERE username = '${req.body.username}' and password = '${req.body.password}'`
-  con.query(sql, function (err, result) {
+  connection.query(sql, function (err, result) {
     if (err) throw err;
     if (result.length > 0) {
                 req.session.accountusername = `${req.body.username}`
@@ -118,7 +118,7 @@ app.post('/api/auth', function (req, res, next) {
 app.post('/api/requestfriend', function (req, res, next) {
       let sql = `SELECT username FROM users WHERE username = '${req.body.username}'`
       try {
-      con.query(sql, function (err, result) {
+      connection.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length > 0) {
           res.send('this username already exists. choose a new one!')
