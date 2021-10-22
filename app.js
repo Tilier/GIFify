@@ -127,7 +127,7 @@ app.post('/api/requestfriend', function (req, res, next) {
             if (result.length > 0) {
               res.send('calm down! you\'ve already sent this friend request.')
               
-              break;
+              return;
             }
           })
           let sql3 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.accountusername}', '${req.body.receiver}')`
