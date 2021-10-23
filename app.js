@@ -123,8 +123,6 @@ app.post('/api/requestfriend', function (req, res, next) {
         if (result.length > 0) {
         let sql2 = `SELECT sender FROM friendRequests WHERE sender = '${req.session.accountusername}' and receiver = '${req.body.receiver}'`
           connection.query(sql2, function (err, result) {
-            res.send(`result: ${result}, sender: ${req.session.accountusername}, receiver: ${req.body.receiver}`)
-            return;
             if (err) throw err;
             if (result.length > 0) {
               res.send('calm down! you\'ve already sent this friend request.')
