@@ -77,6 +77,7 @@ app.post('/api/createaccount', function (req, res, next) {
       try {
       connection.query(sql, function (err, result) {
         if (err) throw err;
+        console.log(`result: ${result}, sender: ${req.session.accountusername}, receiver: ${req.body.receiver}`)
         if (result.length > 0) {
           res.send('this username already exists. choose a new one!')
         } else {
