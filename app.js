@@ -129,9 +129,8 @@ app.post('/api/requestfriend', function (req, res, next) {
               res.send('calm down! you\'ve already sent this friend request.')
               
               return;
-            }
-          })
-          let sql3 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.accountusername}', '${req.body.receiver}')`
+            } else {
+              let sql3 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.accountusername}', '${req.body.receiver}')`
           connection.query(sql2, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
@@ -139,6 +138,8 @@ app.post('/api/requestfriend', function (req, res, next) {
             
             next();
           });
+            }
+          })
         } else {
           res.send('invalid username.')
         }
