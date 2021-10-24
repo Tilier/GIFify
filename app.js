@@ -131,7 +131,7 @@ app.post('/api/requestfriend', function (req, res, next) {
               return;
             } else {
               let sql3 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.accountusername}', '${req.body.receiver}')`
-          connection.query(sql2, function (err, result) {
+          connection.query(sql3, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
             res.redirect('/')
