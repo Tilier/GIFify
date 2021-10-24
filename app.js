@@ -141,7 +141,7 @@ app.post('/api/requestfriend', function (req, res, next) {
                   })
                 } else {
               let sql4 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.accountusername}', '${req.body.receiver}')`
-          connection.query(sql3, function (err, result) {
+          connection.query(sql4, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
             res.send('sent friends request!')
