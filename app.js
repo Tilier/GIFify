@@ -130,24 +130,36 @@ app.post('/api/requestfriend', function (req, res, next) {
               
               return;
             } else {
-              let sql3 = `SELECT receiver FROM friendRequests WHERE sender = '${req.body.receiver}' and receiver = '${req.session.accountusername}'`
-              connection.query(sql3, function (err, result) {
+              let sql3 = `SELECT friend1 FROM friends WHERE friend1 = '${req.body.receiver}' and friend2 = '${req.session.accountusername}'`
+              connection.query(sql, function (err, result) {
                 if (err) throw err;
                 if (result.length > 0) {
-                  res.send('this user has already sent you a friend request! that means that you can now both send gifs to each other!')
-                  let sql3p5 = `DELETE FROM friendRequests WHERE sender = '${req.body.receiver}' and receiver = '${req.session.accountusername}'`
-                  connection.query(sql3p5, function (err, result) {
-                    if (err) throw err;
-                  })
+                  res.send('you silly baka! you\'re already friends with this person!')
                 } else {
-              let sql4 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.accountusername}', '${req.body.receiver}')`
-          connection.query(sql4, function (err, result) {
-            if (err) throw err;
-            console.log("1 record inserted");
-            res.send('sent friends request!')
-          });
-          }
-          })
+                  let sql4 = `SELECT receiver FROM friendRequests WHERE sender = '${req.body.receiver}' and receiver = '${req.session.accountusername}'`
+                  connection.query(sql4, function (err, result) {
+                    if (err) throw err;
+                    if (result.length > 0) {
+                      res.send('this user has already sent you a friend request! that means that you can now both send gifs to each other!')
+                      let sql4p2 = `DELETE FROM friendRequests WHERE sender = '${req.body.receiver}' and receiver = '${req.session.accountusername}'`
+                      connection.query(sql4p5, function (err, result) {
+                        if (err) throw err;
+                        let sql4p3 = `INSERT INTO friends (friend1, friend2) VALUES ('${req.body.receiver}', '${req.session.accountusername}')`
+                        connection.query(sql4p3, function (err, result) {
+                          if (err) throw err;
+                        })
+                      })
+                    } else {
+                      let sql5 = `INSERT INTO friendRequests (sender, receiver) VALUES ('${req.session.accountusername}', '${req.body.receiver}')`
+                      connection.query(sql5, function (err, result) {
+                        if (err) throw err;
+                        console.log("1 record inserted");
+                        res.send('sent friends request!')
+                      });
+                    }
+                  })
+                }
+              })
             }
           })
         } else {
