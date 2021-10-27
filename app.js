@@ -142,7 +142,7 @@ app.post('/api/requestfriend', function (req, res, next) {
                     if (result.length > 0) {
                       res.send('this user has already sent you a friend request! that means that you can now both send gifs to each other!')
                       let sql4p2 = `DELETE FROM friendRequests WHERE sender = '${req.body.receiver}' and receiver = '${req.session.accountusername}'`
-                      connection.query(sql4p5, function (err, result) {
+                      connection.query(sql4p2, function (err, result) {
                         if (err) throw err;
                         let sql4p3 = `INSERT INTO friends (friend1, friend2) VALUES ('${req.body.receiver}', '${req.session.accountusername}')`
                         connection.query(sql4p3, function (err, result) {
