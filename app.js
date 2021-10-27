@@ -131,7 +131,7 @@ app.post('/api/requestfriend', function (req, res, next) {
               return;
             } else {
               let sql3 = `SELECT friend1 FROM friends WHERE friend1 = '${req.body.receiver}' and friend2 = '${req.session.accountusername}'`
-              connection.query(sql, function (err, result) {
+              connection.query(sql3, function (err, result) {
                 if (err) throw err;
                 if (result.length > 0) {
                   res.send('you silly baka! you\'re already friends with this person!')
