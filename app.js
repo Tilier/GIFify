@@ -3,7 +3,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql')
-var session = require('cookie-session')
+var session = require('cookie-session');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // var indexRouter = require('./routes/index');
 // var quotesRouter = require('./routes/quotes');
@@ -80,7 +82,8 @@ app.post('/api/createaccount', function (req, res, next) {
         if (result.length > 0) {
           res.send('this username already exists. choose a new one!')
         } else {
-          let sql2 = `INSERT INTO users (username, password) VALUES ('${req.body.username}', '${req.body.password}')`
+          bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+          let sql2 = `INSERT INTO users (username, password) VALUES ('${req.body.username}', '${hash}')`
           connection.query(sql2, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
@@ -92,6 +95,7 @@ app.post('/api/createaccount', function (req, res, next) {
             
             next();
           });
+          })
         }
       });
       } catch (e) {
@@ -100,17 +104,23 @@ app.post('/api/createaccount', function (req, res, next) {
 })
 
 app.post('/api/auth', function (req, res, next) {
-  let sql = `SELECT username FROM users WHERE username = '${req.body.username}' and password = '${req.body.password}'`
+  let sql = `SELECT password FROM users WHERE username = '${req.body.username}'`
   connection.query(sql, function (err, result) {
     if (err) throw err;
     if (result.length > 0) {
-                req.session.accountusername = `${req.body.username}`
-            req.session.accountpassword = `${req.body.password}`
-            req.session.loggedin = true
-      res.redirect('/')
-      next();
+      bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
+        if (result == true) {
+          req.session.accountusername = `${req.body.username}`
+          req.session.accountpassword = `${req.body.password}`
+          req.session.loggedin = true
+          res.redirect('/')
+          next();
+        } else {
+          res.send('incorrect password.')
+        }
+      })
     } else {
-      res.send('incorrect username or password.')
+      res.send('incorrect username.')
     }
   })
 })
