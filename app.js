@@ -75,7 +75,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
   if (typeof req.session.message == 'string') {
-    res.sendFile(`
+    res.send(`
     <!DOCTYPE html>
     <html lang="en">
       <head>
