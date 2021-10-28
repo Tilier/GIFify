@@ -75,11 +75,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
   if (typeof req.session.message == 'string') {
+    console.log(req.session.message)
     let message = req.session.message;
     let messagetype = req.session.messagetype;
     req.session.message = null;
     req.session.messagetype = null;
-    console.log(req.session.message)
+    console.log(`before: ${message} ~ after: ${req.session.message}`)
     res.send(`
     <!DOCTYPE html>
     <html lang="en">
