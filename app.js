@@ -45,6 +45,8 @@ function handleDisconnect() {
 function sendMessage(message, type, req, res, next) {
   req.session.message = message;
   req.session.messagetype = type;
+  console.log('set')
+  
   res.redirect('/');
   next();
 }
