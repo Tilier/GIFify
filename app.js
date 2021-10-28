@@ -108,11 +108,13 @@ app.post('/api/auth', function (req, res, next) {
   connection.query(sql, function (err, result) {
     if (err) throw err;
     if (result.length > 0) {
-      bcrypt.compare(req.body.password, result, function(err, result) {
-        if (result == true) {
+      bcrypt.compare(req.body.password, result, function(err, result2) {
+        if (result2 == true) {
           req.session.accountusername = `${req.body.username}`
           req.session.accountpassword = `${req.body.password}`
           req.session.loggedin = true
+          console.log(`result2: ${result2}`)
+          console.log(`result: ${result}`)
           res.redirect('/')
           next();
         } else {
