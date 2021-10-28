@@ -86,12 +86,13 @@ app.get('/', function (req, res) {
         <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
       </head>
       <body>
-        <h1>GIFify</h1>
         <h3>${req.session.message}</h3>
       <script type="module" src="index.js"></script>
       </body>
     </html>
     `)
+    req.session.message = null;
+    req.session.messagetype = null;
   } else {
     if (req.session.loggedin == true) {
       res.sendFile(__dirname + '/public/home.html')
