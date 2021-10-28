@@ -113,10 +113,9 @@ app.post('/api/auth', function (req, res, next) {
           req.session.accountusername = `${req.body.username}`
           req.session.accountpassword = `${req.body.password}`
           req.session.loggedin = true
-          console.log(`result2: ${result2}`)
-          console.log(`result: ${result}`)
-          res.redirect('/')
-          next();
+          res.send(`result: ${result} ~ result2: ${result2}`)
+          // res.redirect('/')
+          // next();
         } else {
           res.send('incorrect password.')
         }
