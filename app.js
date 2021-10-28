@@ -87,6 +87,8 @@ app.get('/', function (req, res) {
       </head>
       <body>
         <h3>${req.session.message}</h3>
+        <h4>${String(req.session.message)}</h4>
+        <h4>${String(typeof req.session.message)}</h4>
       <script type="module" src="index.js"></script>
       </body>
     </html>
