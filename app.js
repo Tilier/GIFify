@@ -117,7 +117,7 @@ app.post('/api/auth', function (req, res, next) {
           // res.redirect('/')
           // next();
         } else {
-          res.send('incorrect password.')
+          res.send(`incorrect password. result: ${result} ~ result2: ${result2}`)
         }
       })
     } else {
