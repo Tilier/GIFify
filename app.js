@@ -42,6 +42,13 @@ function handleDisconnect() {
   });
 }
 
+function sendMessage(message, type, res, req, next) {
+  req.session.message = message;
+  req.session.messagetype = type;
+  res.redirect('/');
+  next();
+}
+
 handleDisconnect();
 
 /* app.use(session({
@@ -67,10 +74,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/quotes', quotesRouter);
 
 app.get('/', function (req, res) {
-  if (req.session.loggedin == true) {
-    res.sendFile(__dirname + '/public/home.html')
+  if (typeof req.session.message == 'string') {
+    res.sendFile(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset=utf-8>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>GIFify</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
+      </head>
+      <body>
+        <h1>GIFify</h1>
+        <h3>${req.session.message}</h3>
+      <script type="module" src="index.js"></script>
+      </body>
+    </html>
+    `)
   } else {
-    res.sendFile(__dirname + '/public/signup.html')
+    if (req.session.loggedin == true) {
+      res.sendFile(__dirname + '/public/home.html')
+    } else {
+      res.sendFile(__dirname + '/public/signup.html')
+    }
   }
 })
 
@@ -114,10 +141,10 @@ app.post('/api/auth', function (req, res, next) {
           req.session.accountpassword = `${req.body.password}`
           req.session.loggedin = true
           // res.send(`result: ${result} ~ result2: ${result2}`)
-          res.redirect('/')
+          sendMessage('logged in!')
           next();
         } else {
-          res.send(`incorrect password. result: ${JSON.stringify(result)} ~ result2: ${result2}`)
+          res.send(`incorrect password.`)
         }
       })
     } else {
