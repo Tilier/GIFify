@@ -79,6 +79,7 @@ app.get('/', function (req, res) {
     let messagetype = req.session.messagetype;
     req.session.message = null;
     req.session.messagetype = null;
+    console.log(req.session.message)
     res.send(`
     <!DOCTYPE html>
     <html lang="en">
