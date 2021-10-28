@@ -42,7 +42,7 @@ function handleDisconnect() {
   });
 }
 
-function sendMessage(message, type, res, req, next) {
+function sendMessage(message, type, req, res, next) {
   req.session.message = message;
   req.session.messagetype = type;
   res.redirect('/');
@@ -141,7 +141,7 @@ app.post('/api/auth', function (req, res, next) {
           req.session.accountpassword = `${req.body.password}`
           req.session.loggedin = true
           // res.send(`result: ${result} ~ result2: ${result2}`)
-          sendMessage('logged in!')
+          sendMessage('logged in!', 'success', req, res, next)
           next();
         } else {
           res.send(`incorrect password.`)
