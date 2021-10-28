@@ -75,6 +75,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
   if (typeof req.session.message == 'string') {
+    let message = req.session.message;
+    let messagetype = req.session.messagetype;
+    req.session.message = null;
+    req.session.messagetype = null;
     res.send(`
     <!DOCTYPE html>
     <html lang="en">
@@ -86,15 +90,13 @@ app.get('/', function (req, res) {
         <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
       </head>
       <body>
-        <h3>${req.session.message}</h3>
-        <h4>${String(req.session.message)}</h4>
-        <h4>${String(typeof req.session.message)}</h4>
+        <h3>${message}</h3>
+        <h4>${String(message)}</h4>
+        <h4>${String(typeof message)}</h4>
       <script type="module" src="index.js"></script>
       </body>
     </html>
     `)
-    req.session.message = null;
-    req.session.messagetype = null;
   } else {
     if (req.session.loggedin == true) {
       res.sendFile(__dirname + '/public/home.html')
