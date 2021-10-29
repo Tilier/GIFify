@@ -116,7 +116,7 @@ app.post('/api/createaccount', function (req, res, next) {
       connection.query(sql, function (err, result) {
         if (err) throw err;
         if (result.length > 0) {
-          res.send('this username already exists. choose a new one!')
+          sendMessage('this username already exists. try a new one!', 'error', req, res, next)
         } else {
           bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
           let sql2 = `INSERT INTO users (username, password) VALUES ('${req.body.username}', '${hash}')`
@@ -127,15 +127,13 @@ app.post('/api/createaccount', function (req, res, next) {
             req.session.accountusername = `${req.body.username}`
             req.session.accountpassword = `${req.body.password}`
             req.session.loggedin = true
-            res.redirect('/')
-            
-            next();
+            sendMessage(`successfully created an account with the name ${req.body.username}!`, 'success', req, res, next)
           });
           })
         }
       });
       } catch (e) {
-        res.send('an error occured. please try again.')
+        sendMessage('an error occured. please try again.', 'error', req, res, next)
       }
 })
 
@@ -153,11 +151,11 @@ app.post('/api/auth', function (req, res, next) {
           sendMessage('logged in!', 'success', req, res, next)
           next();
         } else {
-          res.send(`incorrect password.`)
+          sendMessage('incorrect password.', 'error', req, res, next)
         }
       })
     } else {
-      res.send('incorrect username.')
+      sendMessage('incorrect username.', 'error', req, res, next)
     }
   })
 })
@@ -173,7 +171,7 @@ app.post('/api/requestfriend', function (req, res, next) {
             if (err) throw err;
             console.log(`result: ${result}, sender: ${req.session.accountusername}, receiver: ${req.body.receiver}`)
             if (result.length > 0) {
-              res.send('calm down! you\'ve already sent this friend request.')
+              sendMessage('calm down! you\'ve already sent this friend request.', 'error', req, res, next)
               
               return;
             } else {
@@ -181,13 +179,13 @@ app.post('/api/requestfriend', function (req, res, next) {
               connection.query(sql3, function (err, result) {
                 if (err) throw err;
                 if (result.length > 0) {
-                  res.send('you silly baka! you\'re already friends with this person!')
+                  sendMessage('you\'ve already sent a friend request to this person!', 'error', req, res, next)
                 } else {
                   let sql4 = `SELECT receiver FROM friendRequests WHERE sender = '${req.body.receiver}' and receiver = '${req.session.accountusername}'`
                   connection.query(sql4, function (err, result) {
                     if (err) throw err;
                     if (result.length > 0) {
-                      res.send('this user has already sent you a friend request! that means that you can now both send gifs to each other!')
+                      sendMessage('this user has already sent you a friend request. that means that you are now friends!', 'success', req, res, next)
                       let sql4p2 = `DELETE FROM friendRequests WHERE sender = '${req.body.receiver}' and receiver = '${req.session.accountusername}'`
                       connection.query(sql4p2, function (err, result) {
                         if (err) throw err;
@@ -201,7 +199,7 @@ app.post('/api/requestfriend', function (req, res, next) {
                       connection.query(sql5, function (err, result) {
                         if (err) throw err;
                         console.log("1 record inserted");
-                        res.send('sent friends request!')
+                        sendMessage('friend request sent!', 'success', req, res, next)
                       });
                     }
                   })
@@ -210,11 +208,11 @@ app.post('/api/requestfriend', function (req, res, next) {
             }
           })
         } else {
-          res.send('invalid username.')
+          sendMessage('invalid username', 'error', req, res, next)
         }
       });
       } catch (e) {
-        res.send('an error occured. please try again.')
+        sendMessage('an error occured. please try again.', 'error', req, res, next)
       }
 })
 
