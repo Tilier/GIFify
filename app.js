@@ -21,27 +21,6 @@ var db_config = {
 
 var connection;
 
-function handleDisconnect() {
-  connection = mysql.createConnection(db_config); // Recreate the connection, since
-                                                  // the old one cannot be reused.
-
-  connection.connect(function(err) {              // The server is either down
-    if(err) {                                     // or restarting (takes a while sometimes).
-      console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-    }                                     // to avoid a hot loop, and to allow our node script to
-  });                                     // process asynchronous requests in the meantime.
-                                          // If you're also serving http, display a 503 error.
-  connection.on('error', function(err) {
-    console.log('db error', err);
-    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-      handleDisconnect();                         // lost due to either server restart, or a
-    } else {                                      // connnection idle timeout (the wait_timeout
-      throw err;                                  // server variable configures this)
-    }
-  });
-}
-
 function sendMessage(message, type, req, res, next) {
   req.session.message = message;
   req.session.messagetype = type;
@@ -50,8 +29,6 @@ function sendMessage(message, type, req, res, next) {
   res.redirect('/');
   next();
 }
-
-handleDisconnect();
 
 /* app.use(session({
 	secret: 'g8sdaf9sf0ms',
@@ -74,6 +51,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 // app.use('/quotes', quotesRouter);
+
+// prevent mysql timeout
+setTimeout(function() {
+  // random query to database
+  connection.query('SELECT username FROM users', function (err, result) {})
+}, 600)
 
 app.get('/', function (req, res) {
   if (typeof req.session.message == 'string') {
