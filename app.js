@@ -96,8 +96,7 @@ app.get('/', function (req, res) {
       </head>
       <body>
         <h3>${message}</h3>
-        <h4>${String(message)}</h4>
-        <h4>${String(typeof message)}</h4>
+        <a href="/">continue to GIFify</a>
       <script type="module" src="index.js"></script>
       </body>
     </html>
