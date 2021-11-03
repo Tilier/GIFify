@@ -225,6 +225,15 @@ app.get('/api/signout', function (req, res, next) {
   next();
 })
 
+app.get('/api/creategifmessage', function (req, res, next) {
+  let sql = `INSERT INTO messages (sender, receiver, gif, caption) VALUES ('${req.query.sender}', '${req.query.receiver}', '${req.query.gif}', '${req.query.caption}')`
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted")
+    res.send('message sent.')
+  })
+})
+
 // custom 500?
 /* app.use(function (error, req, res, next) {
     res.send('oops! an internal server error occured. please try again.', 500);
