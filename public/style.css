@@ -12,3 +12,9 @@
   width: 95vw;
   height: 50vh;
 }
+
+.alignitemscenter {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
