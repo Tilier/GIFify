@@ -225,7 +225,7 @@ app.get('/api/signout', function (req, res, next) {
   next();
 })
 
-app.get('/api/sendgifmessage', function (req, res, next) {
+app.post('/api/sendgifmessage', function (req, res, next) {
   let sql = `INSERT INTO messages (sender, receiver, gif, caption) VALUES ('${req.body.sender}', '${req.body.receiver}', '${req.body.gif}', '${req.body.caption}')`
   connection.query(sql, function (err, result) {
     if (err) throw err;
