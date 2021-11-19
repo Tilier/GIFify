@@ -235,7 +235,7 @@ app.post('/api/sendgifmessage', function (req, res, next) {
 })
 
 app.get('/api/messagelist', function (req, res, next) {
-  let sql = `SELECT all FROM messages (receiver) VALUES ('${req.session.accountusername}')`
+  let sql = `SELECT * FROM messages (receiver) VALUES ('${req.session.accountusername}')`
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(JSON.stringify(result))
