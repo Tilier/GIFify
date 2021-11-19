@@ -17,6 +17,8 @@
   </form>
   
   <button onclick="sendGifMessage()">send example message</button>
+  
+  <button onclick="getMessages()">reload messages</button>
     
   <script>
   function sendGifMessage() {
@@ -34,8 +36,19 @@
       	}, 
     	error: console.error 
     }); 
-
-}
+  }
+  
+  function getMessages() {
+	$.ajax({ 
+		url: "/api/messagelist",
+		type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+		success: function(responseData) { 
+            // just testing what the JSON is going to look like.
+			console.log(responseData)
+      	}, 
+    	error: console.error 
+    }); 
+  }
   </script>
 </body>
 </html>
