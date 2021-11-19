@@ -226,11 +226,19 @@ app.get('/api/signout', function (req, res, next) {
 })
 
 app.post('/api/sendgifmessage', function (req, res, next) {
-  let sql = `INSERT INTO messages (sender, receiver, gif, caption) VALUES ('${req.body.sender}', '${req.body.receiver}', '${req.body.gif}', '${req.body.caption}')`
+  let sql = `INSERT INTO messages (sender, receiver, gif, caption) VALUES ('${req.session.accountusername}', '${req.body.receiver}', '${req.body.gif}', '${req.body.caption}')`
   connection.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted")
     res.send('message sent.')
+  })
+})
+
+app.get('/api/messagelist', function (req, res, next) {
+  let sql = `SELECT all FROM messages (receiver) VALUES ('${req.session.accountusername}')`
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(JSON.stringify(result))
   })
 })
 
