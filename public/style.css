@@ -1,11 +1,16 @@
 @font-face {
   font-family: CalSans;
-  src: url("./assets/font.ttf");
+  src: url("https://github.com/calendso/font/raw/main/fonts/webfonts/CalSans-SemiBold.ttf");
 }
 
 * {
   margin: 0;
   padding: 0;
+  font-family: CalSans;
+}
+
+button, input {
+  font-family: CalSans;
 }
 
 .accountpage {
