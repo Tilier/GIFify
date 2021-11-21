@@ -21,15 +21,17 @@
   <button onclick="getMessages()">reload messages</button>
   
   <div class="messageBox">
-  	<div class="areMessages">
-	  <img src="./assets/imagefailed.svg"
+  	<div class="areMessages" style="display:none">
+	  <img class="currentImage" src="./assets/imagefailed.svg">
 	</div>
-	<div class="noMessages">
+	<div class="noMessages" style="display:none">
 	  
 	</div>
   </div>
     
   <script>
+  var currentShowing = 0
+  
   function sendGifMessage() {
 	$.ajax({ 
 		url: "/api/sendgifmessage",
@@ -57,6 +59,18 @@
       	}, 
     	error: console.error 
     }); 
+  }
+  
+  function showMessages(data) {
+    if (data.length == 0) {
+      document.querySelector(".noMessages").style.display = "block"
+      document.querySelector(".allMessages").style.display = "none"
+    } else {
+      let currentData = data[currentShowing]
+      document.querySelector(".allMessages").style.display = "block"
+      document.querySelector(".noMessages").style.display = "none"
+      document.querySelector(".currentImage").src = currentData["gif"]
+    }
   }
   </script>
 </body>
