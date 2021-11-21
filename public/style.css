@@ -1,6 +1,6 @@
 @font-face {
   font-family: CalSans;
-  src: url("https://github.com/calendso/font/raw/main/fonts/webfonts/CalSans-SemiBold.ttf");
+  src: url("./assets/CalSans.ttf");
 }
 
 * {
