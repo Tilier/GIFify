@@ -67,7 +67,7 @@
       document.querySelector(".areMessages").style.display = "none"
     } else {
       console.log(data)
-      data = JSON.stringify(data)
+      data = JSON.parse(data)
       let currentData = data[currentShowing]
       console.log(currentData)
       document.querySelector(".areMessages").style.display = "block"
