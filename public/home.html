@@ -222,6 +222,12 @@
         tenorViewModel: tenorViewModel
     }
   })();
+  
+        $().ready(function () {
+            var vm = tenor.tenorViewModel;
+            ko.applyBindings(vm);
+            vm.search();
+        });
   </script>
 </body>
 </html>
