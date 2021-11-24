@@ -18,20 +18,23 @@
   
     <!-- this code is not mine, but courtesy of https://github.com/matiasmolleja/tenorAPI-example -->
 
-    <!-- message list" -->
-    <ul id="messages" data-bind="foreach: tenor.tenorViewModel.messages">
-        <li>
-            <a href="#" target="blank" data-bind="attr : {href : url}, text: url"></a>
-            <img data-bind="attr : {src : media[0].nanogif.url}" />
-        </li>
-    </ul>
-
     <!-- gif container -->
     <ul id="gif-list" style="display:none;" data-bind="foreach: gifs, event : { scroll : checkIfBottom}, visible : gifs().length">
         <li>
             <img data-bind="attr : { src : media[0].nanogif.url }, , click : $root.addToMessageList" />
         </li>
     </ul>
+
+    <!-- error message -->
+    <div id="error-panel" data-bind="visible: errorMessage">
+        <p style="color: red">Error message:</p>
+        <p data-bind="text : errorMessage"></p>
+    </div>
+
+    <!-- searchbox -->
+    <div id="search-panel">
+        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="write your search term here">
+    </div>
     
     <!-- end of code that isn't mine -->
   
