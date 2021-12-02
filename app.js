@@ -161,6 +161,9 @@ app.post('/api/auth', function (req, res, next) {
 })
 
 app.post('/api/requestfriend', function (req, res, next) {
+    if (req.body.receiver == req.session.accountusername) {
+      sendMessage('you can\'t friend request yourself!', 'error', req, res, next)
+    }
       let sql = `SELECT username FROM users WHERE username = '${req.body.receiver}'`
       try {
       connection.query(sql, function (err, result) {
@@ -236,6 +239,14 @@ app.post('/api/sendgifmessage', function (req, res, next) {
 
 app.get('/api/messagelist', function (req, res, next) {
   let sql = `SELECT * FROM messages WHERE receiver = '${req.session.accountusername}'`
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(JSON.stringify(result))
+  })
+})
+
+app.get('/api/friendlist', function (req, res, next) {
+  let sql = `SELECT * FROM friends WHERE friend1 = '${req.session.accountusername}' OR friend2 = '${req.session.accountusername}'`
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(JSON.stringify(result))
