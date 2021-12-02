@@ -28,3 +28,7 @@ button, input {
   justify-content:center;
   align-items:center;
 }
+
+#gif-list li {
+  display: inline-block;
+}
