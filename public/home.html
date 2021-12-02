@@ -54,6 +54,8 @@
   <script>
   var currentShowing = 0
   
+  getFriendsList()
+  
   function sendGifMessage() {
 	$.ajax({ 
 		url: "/api/sendgifmessage",
@@ -96,6 +98,25 @@
       document.querySelector(".noMessages").style.display = "none"
       document.querySelector(".currentImage").src = currentData["gif"]
     }
+  }
+  
+  function getFriendsList() {
+	$.ajax({ 
+		url: "/api/messagelist",
+		type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+		success: function(responseData) { 
+            let list = JSON.parse(responseData)
+            let friendsList = [];
+            for i in list {
+              if (i["friend1"] == req.session.accountusername) {
+                friendsList.push(i["friend2"])
+              } else {
+                friendsList.push(i["friend1"])
+              }
+            }
+      	}, 
+    	error: console.error 
+    }); 
   }
   
   // this code is not mine, but courtesy of https://github.com/matiasmolleja/tenorAPI-example
