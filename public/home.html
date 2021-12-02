@@ -105,10 +105,19 @@
 		url: "/api/messagelist",
 		type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
 		success: function(responseData) { 
+            let username;
+              $.ajax({ 
+    url: "/api/getusername",
+    type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+    success: function(responseData) { 
+      username = responseData
+    }, 
+    error: console.error 
+  }); 
             let list = JSON.parse(responseData)
             let friendsList = [];
             for (let i in list) {
-              if (i["friend1"] == req.session.accountusername) {
+              if (i["friend1"] == username) {
                 friendsList.push(i["friend2"])
               } else {
                 friendsList.push(i["friend1"])
