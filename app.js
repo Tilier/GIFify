@@ -253,6 +253,10 @@ app.get('/api/friendlist', function (req, res, next) {
   })
 })
 
+app.get('/api/getusername', function (req, res, next) {
+  res.send(req.session.accountusername)
+})
+
 // custom 500?
 /* app.use(function (error, req, res, next) {
     res.send('oops! an internal server error occured. please try again.', 500);
