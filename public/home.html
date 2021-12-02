@@ -107,7 +107,7 @@
 		success: function(responseData) { 
             let list = JSON.parse(responseData)
             let friendsList = [];
-            for i in list {
+            for (let i in list) {
               if (i["friend1"] == req.session.accountusername) {
                 friendsList.push(i["friend2"])
               } else {
