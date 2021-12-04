@@ -38,7 +38,7 @@
     
     <!-- end of code that isn't mine -->
   
-  <button onclick="sendGifMessage()">send message</button>
+  <button onclick="openLightbox()">send message</button>
   
   <button onclick="getMessages()">reload messages</button>
   
@@ -50,11 +50,36 @@
 	  
 	</div>
   </div>
+  
+  <div id="lightboxCont" style="background: rgba(0, 0, 0, 0.5); width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; display: none">
+  <div class="lightbox">
+      <h1>send a gif!</h1>
+      <img src="./assets/imagefailed.svg">
+      <form>
+      <label for="friends">to who?</label>
+      <select name="friends" id="friendList">
+          
+      </select>
+      <input type="submit">
+      </form>
+  </div>
+  </div>
     
   <script>
   var currentShowing = 0
   
   getFriendsList()
+  
+  function openLightbox() {
+    document.querySelector("#lightboxCont").style.display = "block"
+    let friends = getFriendsList()
+    for (let i in friends) {
+      let element = document.createElement("OPTION")
+      element.innerHTML = i;
+      element.value = i;
+      document.getElementById('friendList').appendChild(element)
+    }
+  }
   
   function sendGifMessage() {
 	$.ajax({ 
@@ -123,6 +148,7 @@
                 friendsList.push(i["friend1"])
               }
             }
+            return friendsList;
       	}, 
     	error: console.error 
     }); 
