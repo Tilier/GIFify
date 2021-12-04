@@ -32,3 +32,8 @@ button, input {
 #gif-list li {
   display: inline-block;
 }
+
+.lightbox {
+  width: 90vw;
+  height: 80vh;
+}
