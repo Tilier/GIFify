@@ -158,7 +158,7 @@
   
   var tenor = (function () {
 
-    var apiKey = 'EWY0AYUO8K26'; 
+    var apiKey = '9G7L51PFFVIW'; 
     var getAnonIdUrl = "https://api.tenor.com/v1/anonid?key=" + apiKey;
     var lastAnonId;
 
@@ -243,6 +243,7 @@
         };
 
         function getGifs() {
+            console.log("ran getGifs()")
             
             var search_url = "https://api.tenor.com/v1/search?tag=" + self.currentSearchTerm()
                 + "&key=" + apiKey
