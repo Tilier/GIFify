@@ -245,7 +245,7 @@
         function getGifs() {
             console.log("ran getGifs()")
             
-            var search_url = "https://api.tenor.com/v1/search?tag=" + self.currentSearchTerm()
+            var search_url = "https://api.tenor.com/v1/search?q=" + self.currentSearchTerm()
                 + "&key=" + apiKey
                 + "&limit=" + limit
                 + "&pos=" + last_position
