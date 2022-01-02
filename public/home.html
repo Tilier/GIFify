@@ -82,8 +82,8 @@
                             for (let i in friendsList) {
                                 let element = document.createElement("OPTION")
                                 console.log(i)
-                                element.innerHTML = i;
-                                element.value = i;
+                                element.innerHTML = friendsList[i];
+                                element.value = friendsList[i];
                                 document.getElementById('friendList').appendChild(element)
                             }
                         },
