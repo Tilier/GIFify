@@ -33,7 +33,7 @@
 
     <!-- searchbox -->
     <div id="search-panel">
-        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="write your search term here">
+        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="write your search term here" oninput="search()">
     </div>
     
     <!-- end of code that isn't mine -->
@@ -153,10 +153,25 @@
     	error: console.error 
     }); 
   }
+	  
+  function search() {
+    let searchQuery = document.querySelector("#text-input").value
+    	$.ajax({ 
+		    url: `https://g.tenor.com/v1/search?q=${searchQuery}&key=9G7L51PFFVIW&limit=24`,
+		    type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+		    success: function(responseData) { 
+          console.log(responseData)
+          document.querySelector("gif-list").innerHTML += "<li><img src="https://media1.tenor.com/images/c7504b9fb03c95b3b5687d744687e11c/tenor.gif?itemid=7212866"></img></li>"
+        }, 
+      error: console.error 
+    }); 
+  }
+	  
+	  
   
   // this code is not mine, but courtesy of https://github.com/matiasmolleja/tenorAPI-example
   
-  var tenor = (function () {
+  /* var tenor = (function () {
 
     var apiKey = '9G7L51PFFVIW'; 
     var getAnonIdUrl = "https://api.tenor.com/v1/anonid?key=" + apiKey;
@@ -284,7 +299,7 @@
             var vm = tenor.tenorViewModel;
             ko.applyBindings(vm);
             vm.search();
-        });
+        }); */
   </script>
 </body>
 </html>
