@@ -162,10 +162,10 @@
                 url: `https://g.tenor.com/v1/search?q=${searchQuery}&key=9G7L51PFFVIW&limit=24`,
                 type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
-                    for (let i in responseData) {
+                    responseData.forEach(function(i) {
                         console.log(i)
                         document.querySelector("#gif-list").innerHTML += `<li><img src="${i.url}"></img></li>`
-                    }
+                    })
                 },
                 error: console.error
             });
