@@ -163,8 +163,8 @@
                 type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
                     for (var i in responseData.results) {
-                        console.log(responseData[i])
-                        document.querySelector("#gif-list").innerHTML += `<li><img src="${responseData[i].url}"></img></li>`
+                        console.log(responseData.results[i])
+                        document.querySelector("#gif-list").innerHTML += `<li><img src="${responseData.results[i].url}"></img></li>`
                     }
                 },
                 error: console.error
