@@ -164,7 +164,7 @@
                 success: function(responseData) {
                     for (var i in responseData.results) {
                         console.log(responseData.results[i])
-                        document.querySelector("#gif-list").innerHTML += `<li><img src="${responseData.results[i].url}"></img></li>`
+                        document.querySelector("#gif-list").innerHTML += `<li><img src="${responseData.results[i].media[0].nanogif.url}"></img></li>`
                     }
                 },
                 error: console.error
