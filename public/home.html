@@ -59,8 +59,8 @@
 
         function openLightbox(gifSrc) {
             document.querySelector("#lightboxCont").style.display = "block"
-            let friends = getFriendsList()
-            console.log(friends)
+            // let friends = getFriendsList()
+            console.log(getFriendsList())
             document.getElementById('gifShow').src = gifSrc;
             for (let i in friends) {
                 let element = document.createElement("OPTION")
