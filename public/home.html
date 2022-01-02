@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset=utf-8>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GIFify</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GIFify</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
 </head>
+
 <body>
-  <h1>GIFify</h1>
-  <form action="/api/requestfriend" method="POST">
-    <input type="text" name="receiver" placeholder="username of friend">
-    <input type="submit" name="submit" value="submit">
-  </form>
-  
+    <h1>GIFify</h1>
+    <form action="/api/requestfriend" method="POST">
+        <input type="text" name="receiver" placeholder="username of friend">
+        <input type="submit" name="submit" value="submit">
+    </form>
+
     <!-- this code is not mine, but courtesy of https://github.com/matiasmolleja/tenorAPI-example -->
 
     <!-- gif container -->
@@ -33,273 +35,275 @@
 
     <!-- searchbox -->
     <div id="search-panel">
-        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="write your search term here" oninput="search()">
+        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="write your search term here" oninput="searchAPI()">
     </div>
-    
+
     <!-- end of code that isn't mine -->
-  
-  <button onclick="openLightbox()">send message</button>
-  
-  <button onclick="getMessages()">reload messages</button>
-  
-  <div class="messageBox">
-  	<div class="areMessages" style="display:none">
-	  <img class="currentImage" src="./assets/imagefailed.svg">
-	</div>
-	<div class="noMessages" style="display:none">
-	  
-	</div>
-  </div>
-  
-  <div id="lightboxCont" style="background: rgba(0, 0, 0, 0.5); width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; display: none">
-  <div class="lightbox">
-      <h1>send a gif!</h1>
-      <img src="./assets/imagefailed.svg">
-      <form>
-      <label for="friends">to who?</label>
-      <select name="friends" id="friendList">
-          
-      </select>
-      <input type="submit">
-      </form>
-  </div>
-  </div>
-    
-  <script>
-  var currentShowing = 0
-  
-  getFriendsList()
-  
-  function openLightbox() {
-    document.querySelector("#lightboxCont").style.display = "block"
-    let friends = getFriendsList()
-    for (let i in friends) {
-      let element = document.createElement("OPTION")
-      element.innerHTML = i;
-      element.value = i;
-      document.getElementById('friendList').appendChild(element)
-    }
-  }
-  
-  function sendGifMessage() {
-	$.ajax({ 
-		url: "/api/sendgifmessage",
-		data: {
-			sender: "Tilier",
-			receiver: "banana",
-			gif: "idk",
-			caption: "idkkkkkk"
-		}, 
-		type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
-		success: function(responseData) { 
-			// empty mcmuffin
-      	}, 
-    	error: console.error 
-    }); 
-  }
-  
-  function getMessages() {
-	$.ajax({ 
-		url: "/api/messagelist",
-		type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
-		success: function(responseData) { 
-            // just testing what the JSON is going to look like.
-			showMessages(responseData)
-      	}, 
-    	error: console.error 
-    }); 
-  }
-  
-  function showMessages(data) {
-    if (data.length == 0) {
-      document.querySelector(".noMessages").style.display = "block"
-      document.querySelector(".areMessages").style.display = "none"
-    } else {
-      console.log(data)
-      data = JSON.parse(data)
-      let currentData = data[currentShowing]
-      console.log(currentData)
-      document.querySelector(".areMessages").style.display = "block"
-      document.querySelector(".noMessages").style.display = "none"
-      document.querySelector(".currentImage").src = currentData["gif"]
-    }
-  }
-  
-  function getFriendsList() {
-	$.ajax({ 
-		url: "/api/friendlist",
-		type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
-		success: function(responseData) { 
-            let username;
-              $.ajax({ 
-    url: "/api/getusername",
-    type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
-    success: function(responseData) { 
-      username = responseData
-    }, 
-    error: console.error 
-  }); 
-            let list = JSON.parse(responseData)
-            let friendsList = [];
-            for (let i in list) {
-              if (i["friend1"] == username) {
-                friendsList.push(i["friend2"])
-              } else {
-                friendsList.push(i["friend1"])
+
+    <button onclick="openLightbox()">send message</button>
+
+    <button onclick="getMessages()">reload messages</button>
+
+    <div class="messageBox">
+        <div class="areMessages" style="display:none">
+            <img class="currentImage" src="./assets/imagefailed.svg">
+        </div>
+        <div class="noMessages" style="display:none">
+
+        </div>
+    </div>
+
+    <div id="lightboxCont" style="background: rgba(0, 0, 0, 0.5); width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; display: none">
+        <div class="lightbox">
+            <h1>send a gif!</h1>
+            <img src="./assets/imagefailed.svg">
+            <form>
+                <label for="friends">to who?</label>
+                <select name="friends" id="friendList">
+
+                </select>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var currentShowing = 0
+
+        getFriendsList()
+
+        function openLightbox() {
+            document.querySelector("#lightboxCont").style.display = "block"
+            let friends = getFriendsList()
+            for (let i in friends) {
+                let element = document.createElement("OPTION")
+                element.innerHTML = i;
+                element.value = i;
+                document.getElementById('friendList').appendChild(element)
+            }
+        }
+
+        function sendGifMessage() {
+            $.ajax({
+                url: "/api/sendgifmessage",
+                data: {
+                    sender: "Tilier",
+                    receiver: "banana",
+                    gif: "idk",
+                    caption: "idkkkkkk"
+                },
+                type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                success: function(responseData) {
+                    // empty mcmuffin
+                },
+                error: console.error
+            });
+        }
+
+        function getMessages() {
+            $.ajax({
+                url: "/api/messagelist",
+                type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                success: function(responseData) {
+                    // just testing what the JSON is going to look like.
+                    showMessages(responseData)
+                },
+                error: console.error
+            });
+        }
+
+        function showMessages(data) {
+            if (data.length == 0) {
+                document.querySelector(".noMessages").style.display = "block"
+                document.querySelector(".areMessages").style.display = "none"
+            } else {
+                console.log(data)
+                data = JSON.parse(data)
+                let currentData = data[currentShowing]
+                console.log(currentData)
+                document.querySelector(".areMessages").style.display = "block"
+                document.querySelector(".noMessages").style.display = "none"
+                document.querySelector(".currentImage").src = currentData["gif"]
+            }
+        }
+
+        function getFriendsList() {
+            $.ajax({
+                url: "/api/friendlist",
+                type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                success: function(responseData) {
+                    let username;
+                    $.ajax({
+                        url: "/api/getusername",
+                        type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                        success: function(responseData) {
+                            username = responseData
+                        },
+                        error: console.error
+                    });
+                    let list = JSON.parse(responseData)
+                    let friendsList = [];
+                    for (let i in list) {
+                        if (i["friend1"] == username) {
+                            friendsList.push(i["friend2"])
+                        } else {
+                            friendsList.push(i["friend1"])
+                        }
+                    }
+                    return friendsList;
+                },
+                error: console.error
+            });
+        }
+
+        function searchAPI() {
+            let searchQuery = document.querySelector("#text-input").value
+            $.ajax({
+                url: `https://g.tenor.com/v1/search?q=${searchQuery}&key=9G7L51PFFVIW&limit=24`,
+                type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                success: function(responseData) {
+                    console.log(responseData)
+                    document.querySelector("gif-list").innerHTML += "<li><img src="
+                    https: //media1.tenor.com/images/c7504b9fb03c95b3b5687d744687e11c/tenor.gif?itemid=7212866"></img></li>"
+                },
+                error: console.error
+            });
+        }
+
+
+
+        // this code is not mine, but courtesy of https://github.com/matiasmolleja/tenorAPI-example
+
+        /* var tenor = (function () {
+
+          var apiKey = '9G7L51PFFVIW'; 
+          var getAnonIdUrl = "https://api.tenor.com/v1/anonid?key=" + apiKey;
+          var lastAnonId;
+
+          var limit = 24;
+          var last_position = 0;
+          var locale = 'en_US' // todo: auto-detect
+
+          var tenorViewModel = new function () {
+              var self = this;
+
+              self.gifs = ko.observableArray().extend( {rateLimit : 50 });        
+              self.currentSearchTerm = ko.observable().extend({ rateLimit: 500 });
+
+              self.messages = ko.observableArray();
+
+              self.isLoading = ko.observable(false);
+              self.errorMessage = ko.observable();
+              self.search = function () {
+                  last_position = 0;
+                  self.gifs.removeAll();
+                  if(self.currentSearchTerm()) {
+                      GetIdAndThenGetGifs();
+                  }            
+              };
+
+              self.getMore = function () {
+                  GetIdAndThenGetGifs();
+              };
+
+              self.checkIfBottom = function (data, event) {
+                  var element = event.target;
+                  if ($(element).scrollTop() + $(element).innerHeight() >= element.scrollHeight) {
+                      self.getMore();
+                  }
+              };
+
+              self.addToMessageList = function(element){
+                  console.log("pressed~")
+              };
+
+              self.handleMouseUp = function(data,event){
+                  var container = $("#gif-list");
+                  if (!container.is(event.target) && container.has(event.target).length === 0) 
+                  {
+                      container.hide();
+                  }
+              };
+
+
+              // todo: detect when the component is hidden and dispose subscrition
+              var subscriptionToInputChange = self.currentSearchTerm.subscribe(function (data) {            
+                  if( !data ) {                
+                      self.gifs.removeAll();
+                      return;
+                  }            
+                  self.search();
+              });
+
+
+              
+
+              function GetIdAndThenGetGifs() {
+                  self.errorMessage("");
+                  if (lastAnonId != undefined) {
+                      getGifs();                
+                      return;
+                  }
+
+                  $.get(getAnonIdUrl).done(function (data) {
+                      
+                      if(!data.anon_id) {
+                          console.log(data.error);
+                          self.errorMessage(data.error);
+                          return;
+                      }
+
+                      lastAnonId = data.anon_id;
+                      getGifs();
+                  })
+                  .fail(requestFailedHandler)
+                  .always( function(){self.isLoading(false)});
+              };
+
+              function getGifs() {
+                  console.log("ran getGifs()")
+                  
+                  var search_url = "https://api.tenor.com/v1/search?q=" + self.currentSearchTerm()
+                      + "&key=" + apiKey
+                      + "&limit=" + limit
+                      + "&pos=" + last_position
+                      + "&locale=" + locale
+                      + "&anon_id=" + lastAnonId;
+
+                  self.isLoading(true);
+                  $.get(search_url).done(function (data) {
+
+                      if(!data.results) {
+                          self.errorMessage(data.error);
+                          return;
+                      }
+                      data.results.forEach(element => {
+                          self.gifs.push(element);
+                      });
+                      last_position = last_position + limit;
+                  })
+                  .fail(requestFailedHandler)
+                  .always(function(){ self.isLoading(false)});
               }
-            }
-            return friendsList;
-      	}, 
-    	error: console.error 
-    }); 
-  }
-	  
-  function search() {
-    let searchQuery = document.querySelector("#text-input").value
-    	$.ajax({ 
-		    url: `https://g.tenor.com/v1/search?q=${searchQuery}&key=9G7L51PFFVIW&limit=24`,
-		    type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
-		    success: function(responseData) { 
-          console.log(responseData)
-          document.querySelector("gif-list").innerHTML += "<li><img src="https://media1.tenor.com/images/c7504b9fb03c95b3b5687d744687e11c/tenor.gif?itemid=7212866"></img></li>"
-        }, 
-      error: console.error 
-    }); 
-  }
-	  
-	  
-  
-  // this code is not mine, but courtesy of https://github.com/matiasmolleja/tenorAPI-example
-  
-  /* var tenor = (function () {
 
-    var apiKey = '9G7L51PFFVIW'; 
-    var getAnonIdUrl = "https://api.tenor.com/v1/anonid?key=" + apiKey;
-    var lastAnonId;
+              function requestFailedHandler(jqXHR, textStatus, errorThrown) {
+                  console.log('Sorry.An error ocurred on the request:' + textStatus);
+                  console.log(errorThrown);
+                  self.errorMessage(errorThrown);
+              }
+          };
 
-    var limit = 24;
-    var last_position = 0;
-    var locale = 'en_US' // todo: auto-detect
-
-    var tenorViewModel = new function () {
-        var self = this;
-
-        self.gifs = ko.observableArray().extend( {rateLimit : 50 });        
-        self.currentSearchTerm = ko.observable().extend({ rateLimit: 500 });
-
-        self.messages = ko.observableArray();
-
-        self.isLoading = ko.observable(false);
-        self.errorMessage = ko.observable();
-        self.search = function () {
-            last_position = 0;
-            self.gifs.removeAll();
-            if(self.currentSearchTerm()) {
-                GetIdAndThenGetGifs();
-            }            
-        };
-
-        self.getMore = function () {
-            GetIdAndThenGetGifs();
-        };
-
-        self.checkIfBottom = function (data, event) {
-            var element = event.target;
-            if ($(element).scrollTop() + $(element).innerHeight() >= element.scrollHeight) {
-                self.getMore();
-            }
-        };
-
-        self.addToMessageList = function(element){
-            console.log("pressed~")
-        };
-
-        self.handleMouseUp = function(data,event){
-            var container = $("#gif-list");
-            if (!container.is(event.target) && container.has(event.target).length === 0) 
-            {
-                container.hide();
-            }
-        };
-
-
-        // todo: detect when the component is hidden and dispose subscrition
-        var subscriptionToInputChange = self.currentSearchTerm.subscribe(function (data) {            
-            if( !data ) {                
-                self.gifs.removeAll();
-                return;
-            }            
-            self.search();
-        });
-
-
+          return {
+              tenorViewModel: tenorViewModel
+          }
+        })();
         
-
-        function GetIdAndThenGetGifs() {
-            self.errorMessage("");
-            if (lastAnonId != undefined) {
-                getGifs();                
-                return;
-            }
-
-            $.get(getAnonIdUrl).done(function (data) {
-                
-                if(!data.anon_id) {
-                    console.log(data.error);
-                    self.errorMessage(data.error);
-                    return;
-                }
-
-                lastAnonId = data.anon_id;
-                getGifs();
-            })
-            .fail(requestFailedHandler)
-            .always( function(){self.isLoading(false)});
-        };
-
-        function getGifs() {
-            console.log("ran getGifs()")
-            
-            var search_url = "https://api.tenor.com/v1/search?q=" + self.currentSearchTerm()
-                + "&key=" + apiKey
-                + "&limit=" + limit
-                + "&pos=" + last_position
-                + "&locale=" + locale
-                + "&anon_id=" + lastAnonId;
-
-            self.isLoading(true);
-            $.get(search_url).done(function (data) {
-
-                if(!data.results) {
-                    self.errorMessage(data.error);
-                    return;
-                }
-                data.results.forEach(element => {
-                    self.gifs.push(element);
-                });
-                last_position = last_position + limit;
-            })
-            .fail(requestFailedHandler)
-            .always(function(){ self.isLoading(false)});
-        }
-
-        function requestFailedHandler(jqXHR, textStatus, errorThrown) {
-            console.log('Sorry.An error ocurred on the request:' + textStatus);
-            console.log(errorThrown);
-            self.errorMessage(errorThrown);
-        }
-    };
-
-    return {
-        tenorViewModel: tenorViewModel
-    }
-  })();
-  
-        $().ready(function () {
-            var vm = tenor.tenorViewModel;
-            ko.applyBindings(vm);
-            vm.search();
-        }); */
-  </script>
+              $().ready(function () {
+                  var vm = tenor.tenorViewModel;
+                  ko.applyBindings(vm);
+                  vm.search();
+              }); */
+    </script>
 </body>
+
 </html>
