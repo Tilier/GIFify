@@ -60,15 +60,38 @@
         function openLightbox(gifSrc) {
             document.querySelector("#lightboxCont").style.display = "block"
             // let friends = getFriendsList()
-            console.log(getFriendsList())
             document.getElementById('gifShow').src = gifSrc;
-            for (let i in friends) {
-                let element = document.createElement("OPTION")
-                console.log(i)
-                element.innerHTML = i;
-                element.value = i;
-                document.getElementById('friendList').appendChild(element)
-            }
+            $.ajax({
+                url: "/api/friendlist",
+                type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                success: function(responseData) {
+                    let list = JSON.parse(responseData)
+                    $.ajax({
+                        url: "/api/getusername",
+                        type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                        success: function(responseData) {
+                            let username = responseData
+                            let friendsList = [];
+                            for (let i in list) {
+                                if (list[i]["friend1"] == username) {
+                                    friendsList.push(list[i]["friend2"])
+                                } else {
+                                    friendsList.push(list[i]["friend1"])
+                                }
+                            }
+                            for (let i in friendsList) {
+                                let element = document.createElement("OPTION")
+                                console.log(i)
+                                element.innerHTML = i;
+                                element.value = i;
+                                document.getElementById('friendList').appendChild(element)
+                            }
+                        },
+                        error: console.error
+                    });
+                },
+                error: console.error
+            });
         }
 
         function sendGifMessage() {
