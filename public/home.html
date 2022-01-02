@@ -43,7 +43,7 @@
     <div id="lightboxCont" style="background: rgba(0, 0, 0, 0.5); width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; display: none">
         <div class="lightbox">
             <h1>send a gif!</h1>
-            <img src="./assets/imagefailed.svg">
+            <img id="gifShow" src="./assets/imagefailed.svg">
             <form>
                 <label for="friends">to who?</label>
                 <select name="friends" id="friendList">
@@ -59,7 +59,7 @@
 
         getFriendsList()
 
-        function openLightbox() {
+        function openLightbox(gif) {
             document.querySelector("#lightboxCont").style.display = "block"
             let friends = getFriendsList()
             for (let i in friends) {
@@ -67,6 +67,7 @@
                 element.innerHTML = i;
                 element.value = i;
                 document.getElementById('friendList').appendChild(element)
+                document.getElementById('gifShow').src = gif;
             }
         }
 
@@ -152,7 +153,7 @@
                     document.querySelector("#gif-list").innerHTML = ""
                     for (var i in responseData.results) {
                         console.log(responseData.results[i])
-                        document.querySelector("#gif-list").innerHTML += `<li><img src="${responseData.results[i].media[0].nanogif.url}"></img></li>`
+                        document.querySelector("#gif-list").innerHTML += `<li><img src="${responseData.results[i].media[0].nanogif.url}" onclick="openLightbox("${responseData.results[i].media[0].nanogif.url}")" style="margin-right:3px;"></img></li>`
                     }
                 },
                 error: console.error
