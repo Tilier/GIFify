@@ -163,7 +163,7 @@
                 type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
                     console.log(responseData)
-                    document.querySelector("gif-list").innerHTML += "<li><img src="https://media1.tenor.com/images/c7504b9fb03c95b3b5687d744687e11c/tenor.gif?itemid=7212866"></img></li>"
+                    document.querySelector("#gif-list").innerHTML += "<li><img src="https://media1.tenor.com/images/c7504b9fb03c95b3b5687d744687e11c/tenor.gif?itemid=7212866"></img></li>"
                 },
                 error: console.error
             });
