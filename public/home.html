@@ -46,7 +46,7 @@
         <div class="lightbox">
             <h1>send a gif!</h1>
             <img id="gifShow" src="./assets/imagefailed.svg">
-            <form onsubmit="sendGifMessage()">
+            <form onsubmit="sendGifMessage()" id="submitform">
                 <label for="friends">to who?</label>
                 <select name="friends" id="friendList">
 
@@ -96,7 +96,7 @@
             });
         }
 
-        document.querySelector("#signout").addEventListener("submit", sendGifMessage(e))
+        document.querySelector("#submitform").addEventListener("submit", sendGifMessage(e))
                                                                     
         function sendGifMessage(e) {
             e.preventDefault();
