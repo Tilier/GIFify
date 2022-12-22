@@ -13,10 +13,10 @@ const saltRounds = 10;
 var app = express();
 
 var db_config = {
-	host     : 'isilo.db.elephantsql.com',
-	user     : 'nnnkyngr',
+	host     : 'sql.freedb.tech',
+	user     : 'freedb_GIFify',
 	password : process.env["SQLPASSWORD"],
-	database : 'nnnkyngr'
+	database : 'freedb_GIFify'
 };
 
 var connection;
