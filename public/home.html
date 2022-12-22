@@ -30,6 +30,8 @@
     <button onclick="openLightbox()">send message</button>
 
     <button onclick="getMessages()">reload messages</button>
+    
+    <button onclick="window.location.href = "/api/signout">sign out</button>
 
     <div class="messageBox">
         <div class="areMessages" style="display:none">
@@ -44,7 +46,7 @@
         <div class="lightbox">
             <h1>send a gif!</h1>
             <img id="gifShow" src="./assets/imagefailed.svg">
-            <form>
+            <form onsubmit="sendGifMessage()">
                 <label for="friends">to who?</label>
                 <select name="friends" id="friendList">
 
@@ -94,7 +96,9 @@
             });
         }
 
-        function sendGifMessage() {
+        function sendGifMessage(e) {
+            e.preventDefault();
+            console.log(e)
             $.ajax({
                 url: "/api/sendgifmessage",
                 data: {
