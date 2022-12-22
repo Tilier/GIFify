@@ -58,6 +58,16 @@
 
     <script>
         var currentShowing = 0
+        var username = "";
+        
+        $.ajax({
+                        url: "/api/getusername",
+                        type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                        success: function(responseData) {
+                            username = responseData
+                        },
+                        error: console.error
+                    });
 
         function openLightbox(gifSrc) {
             document.querySelector("#lightboxCont").style.display = "block"
@@ -99,18 +109,17 @@
         document.querySelector("#submitform").addEventListener("submit", function(e) {e.preventDefault(); sendGifMessage(e)})
                                                                     
         function sendGifMessage(e) {
-            console.log(e)
             $.ajax({
                 url: "/api/sendgifmessage",
                 data: {
-                    sender: "Tilier",
-                    receiver: "banana",
-                    gif: "idk",
-                    caption: "idkkkkkk"
+                    sender: username,
+                    receiver: document.querySelector("#friendList").value,
+                    gif: document.querySelector("#gifShow").src,
+                    caption: ""
                 },
                 type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
-                    // empty mcmuffin
+                    console.log("sent!")
                 },
                 error: console.error
             });
