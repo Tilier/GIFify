@@ -13,10 +13,10 @@ const saltRounds = 10;
 var app = express();
 
 var db_config = {
-	host     : 'remotemysql.com',
-	user     : '6OcHtB5ESO',
+	host     : 'isilo.db.elephantsql.com',
+	user     : 'nnnkyngr',
 	password : process.env["SQLPASSWORD"],
-	database : '6OcHtB5ESO'
+	database : 'nnnkyngr'
 };
 
 var connection;
