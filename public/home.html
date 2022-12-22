@@ -181,7 +181,38 @@
                 error: console.error
             });
             currentShowing++;
-            getMessages();
+            $.ajax({
+                url: "/api/messagelist",
+                type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                success: function(data) {
+                    // just testing what the JSON is going to look like.
+                    data = JSON.parse(data)
+                    let currentData = data[currentShowing - 1]
+                    if (currentShowing + 1 > data.length) {
+                           document.querySelector(".noMessages").style.display = "block"
+                           document.querySelector(".areMessages").style.display = "none"
+                        
+                        $.ajax({
+                url: "/api/delete",
+                data: {
+                    sender: currentData["sender"],
+                    gif: currentData["gif"],
+                    caption: currentData["caption"]
+                },
+                type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
+                success: function(responseData) {
+                    console.log("deleted!")
+                },
+                error: console.error
+            });
+                    } else {
+                        getMessages();
+                    }
+                  
+                },
+                error: console.error
+            });
+            
         }
 
         function getFriendsList() {
