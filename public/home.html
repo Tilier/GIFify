@@ -96,10 +96,9 @@
             });
         }
 
-        document.querySelector("#submitform").addEventListener("submit", e.preventDefault())
+        document.querySelector("#submitform").addEventListener("submit", function(e) {e.preventDefault(); sendGifMessage(e)})
                                                                     
         function sendGifMessage(e) {
-            e.preventDefault();
             console.log(e)
             $.ajax({
                 url: "/api/sendgifmessage",
