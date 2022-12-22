@@ -236,6 +236,15 @@ app.post('/api/sendgifmessage', function (req, res, next) {
     res.send('message sent.')
   })
 })
+	
+app.post('/api/delete', function (req, res, next) {
+  let sql = `DELETE FROM messages WHERE sender = '${req.body.sender}' and receiver = '${req.session.accountusername}' and gif = '${req.body.gif}' and caption = '${req.body.caption}'`
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record deleted")
+    res.send('message deleted.')
+  })
+})
 
 app.get('/api/messagelist', function (req, res, next) {
   let sql = `SELECT * FROM messages WHERE receiver = '${req.session.accountusername}'`
