@@ -36,7 +36,7 @@
     <div class="messageBox">
         <div class="areMessages" style="display:none">
             <img class="currentImage" src="./assets/imagefailed.svg">
-            <button onclick="next()">sign out</button>
+            <button onclick="next()">next</button>
         </div>
         <div class="noMessages" style="display:none">
 
@@ -163,6 +163,7 @@
                     // just testing what the JSON is going to look like.
                     data = JSON.parse(data)
                     let currentData = data[currentShowing]
+                    console.log(currentData)
                     $.ajax({
                 url: "/api/delete",
                 data: {
