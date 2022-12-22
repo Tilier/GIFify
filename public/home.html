@@ -36,6 +36,7 @@
     <div class="messageBox">
         <div class="areMessages" style="display:none">
             <img class="currentImage" src="./assets/imagefailed.svg">
+            <button onclick="next()">sign out</button>
         </div>
         <div class="noMessages" style="display:none">
 
@@ -68,12 +69,8 @@
                         },
                         error: console.error
                     });
-
-        function openLightbox(gifSrc) {
-            document.querySelector("#lightboxCont").style.display = "block"
-            // let friends = getFriendsList()
-            document.getElementById('gifShow').src = gifSrc;
-            $.ajax({
+        
+        $.ajax({
                 url: "/api/friendlist",
                 type: "GET", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
@@ -104,6 +101,12 @@
                 },
                 error: console.error
             });
+
+        function openLightbox(gifSrc) {
+            document.querySelector("#lightboxCont").style.display = "block"
+            // let friends = getFriendsList()
+            document.getElementById('gifShow').src = gifSrc;
+            
         }
 
         document.querySelector("#submitform").addEventListener("submit", function(e) {e.preventDefault(); sendGifMessage(e)})
@@ -150,6 +153,11 @@
                 document.querySelector(".noMessages").style.display = "block"
                 document.querySelector(".areMessages").style.display = "none"
             }
+        }
+        
+        function next() {
+            currentShowing++;
+            getMessages()
         }
 
         function getFriendsList() {
