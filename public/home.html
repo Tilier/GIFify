@@ -138,10 +138,7 @@
         }
 
         function showMessages(data) {
-            if (data.length == 0) {
-                document.querySelector(".noMessages").style.display = "block"
-                document.querySelector(".areMessages").style.display = "none"
-            } else {
+            if (data.length > 0) {
                 console.log(data)
                 data = JSON.parse(data)
                 let currentData = data[currentShowing]
@@ -149,6 +146,9 @@
                 document.querySelector(".areMessages").style.display = "block"
                 document.querySelector(".noMessages").style.display = "none"
                 document.querySelector(".currentImage").src = currentData["gif"]
+            } else {
+                document.querySelector(".noMessages").style.display = "block"
+                document.querySelector(".areMessages").style.display = "none"
             }
         }
 
