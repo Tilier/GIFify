@@ -96,7 +96,7 @@
             });
         }
 
-        document.querySelector("#submitform").addEventListener("submit", sendGifMessage(e))
+        document.querySelector("#submitform").addEventListener("submit", e.preventDefault())
                                                                     
         function sendGifMessage(e) {
             e.preventDefault();
