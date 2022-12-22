@@ -13,10 +13,10 @@ const saltRounds = 10;
 var app = express();
 
 var db_config = {
-	host     : 'sql.freedb.tech',
-	user     : 'freedb_GIFify',
+	host     : 'sql9.freemysqlhosting.net',
+	user     : 'sql9586137',
 	password : process.env["SQLPASSWORD"],
-	database : 'freedb_GIFify'
+	database : 'sql9586137'
 };
 
 var connection;
