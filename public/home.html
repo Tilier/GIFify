@@ -31,7 +31,7 @@
 
     <button onclick="getMessages()">reload messages</button>
     
-    <button onclick="window.location.href = "/api/signout">sign out</button>
+    <button onclick="window.location.href = '/api/signout'">sign out</button>
 
     <div class="messageBox">
         <div class="areMessages" style="display:none">
@@ -96,6 +96,8 @@
             });
         }
 
+        document.querySelector("#signout").addEventListener("submit", sendGifMessage(e))
+                                                                    
         function sendGifMessage(e) {
             e.preventDefault();
             console.log(e)
