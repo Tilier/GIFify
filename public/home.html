@@ -13,9 +13,9 @@
 
 <body>
     <div class="fullpage alignitemscenter">
-        <div>
+        <div style="padding: 30px">
     <img width="150px" src="assets/gifify.svg">
-    <form action="/api/requestfriend" method="POST">
+    <form action="/api/requestfriend" method="POST" style="margin-bottom: 20px">
         <input type="text" name="receiver" placeholder="username of friend">
         <input type="submit" name="submit" value="request">
     </form>
@@ -25,17 +25,18 @@
     </ul>
 
     <!-- searchbox -->
-    <div id="search-panel">
+    <div id="search-panel" style="margin-bottom: 20px" style="margin-bottom: 20px">
         <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="search query" oninput="searchAPI()">
     </div>
 
-    <button onclick="currentShowing = 0; getMessages()">reload messages</button>
+    <button onclick="currentShowing = 0; getMessages()" style="margin-bottom: 20px">reload messages</button>
     
-    <button onclick="window.location.href = '/api/signout'">sign out</button>
+    <button onclick="window.location.href = '/api/signout'" style="margin-bottom: 20px">sign out</button>
 
     <div class="messageBox">
         <div class="areMessages" style="display:none">
             <img class="currentImage" src="./assets/imagefailed.svg">
+            <br>
             <button onclick="next()">next</button>
         </div>
         <div class="noMessages" style="display:none">

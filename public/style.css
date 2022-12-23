@@ -51,14 +51,14 @@ button, input {
 .fullpage {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .sign {
   padding: 10px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
   box-shadow: 0 5px 20px 0px #1c222b2e;
   outline: none;
   padding: 10px;
