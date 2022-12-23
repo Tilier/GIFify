@@ -43,9 +43,9 @@ button, input {
   display: inline-block;
 }
 
-.lightbox {
-  width: 90vw;
-  height: 80vh;
+.lightboxCont {
+  width: 100vw;
+  height: 1
 }
 
 .fullpage {

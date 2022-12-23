@@ -15,7 +15,7 @@
     <div class="fullpage alignitemscenter">
         <div style="padding: 30px">
     <img width="150px" src="assets/gifify.svg">
-    <form action="/api/requestfriend" method="POST" style="margin-bottom: 20px">
+    <form action="/api/requestfriend" method="POST" style="margin-bottom: 10px">
         <input type="text" name="receiver" placeholder="username of friend">
         <input type="submit" name="submit" value="request">
     </form>
@@ -25,18 +25,20 @@
     </ul>
 
     <!-- searchbox -->
-    <div id="search-panel" style="margin-bottom: 20px" style="margin-bottom: 20px">
+    <div id="search-panel" style="margin-bottom: 10px">
         <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="search query" oninput="searchAPI()">
     </div>
 
-    <button onclick="currentShowing = 0; getMessages()" style="margin-bottom: 20px">reload messages</button>
+    <button onclick="currentShowing = 0; getMessages()" style="margin-bottom: 10px">reload messages</button>
     
-    <button onclick="window.location.href = '/api/signout'" style="margin-bottom: 20px">sign out</button>
+    <button onclick="window.location.href = '/api/signout'" style="margin-bottom: 10px">sign out</button>
 
     <div class="messageBox">
         <div class="areMessages" style="display:none">
             <img class="currentImage" src="./assets/imagefailed.svg">
             <br>
+            <h5 id="caption"></h5>
+            <h6 id="sender">from </h6>
             <button onclick="next()">next</button>
         </div>
         <div class="noMessages" style="display:none">
@@ -46,11 +48,12 @@
     </div>
     </div>
 
-    <div id="lightboxCont" style="background: rgba(0, 0, 0, 0.5); width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; display: none">
+    <div id="lightboxCont" class="fullpage alignitemscenter" style="background: rgb(185, 185, 185); display: none">
         <div class="lightbox">
             <h1>send a gif!</h1>
             <img id="gifShow" src="./assets/imagefailed.svg">
             <form id="submitform">
+                <input type="text" name="caption" placeholder="caption">
                 <label for="friends">to who?</label>
                 <select name="friends" id="friendList">
 
@@ -121,7 +124,7 @@
                     sender: username,
                     receiver: document.querySelector("#friendList").value,
                     gif: document.querySelector("#gifShow").src,
-                    caption: ""
+                    caption: document.querySelector("input[name='caption']").value
                 },
                 type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
@@ -152,6 +155,8 @@
                 document.querySelector(".areMessages").style.display = "block"
                 document.querySelector(".noMessages").style.display = "none"
                 document.querySelector(".currentImage").src = currentData["gif"]
+                document.querySelector("caption").innerHTML = currentData["caption"]
+                document.querySelector("sender").innerHTML = currentData["sender"]
             } else {
                 document.querySelector(".noMessages").style.display = "block"
                 document.querySelector(".areMessages").style.display = "none"
