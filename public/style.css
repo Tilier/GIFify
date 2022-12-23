@@ -9,6 +9,10 @@
   font-family: CalSans;
 }
 
+*:not(input) {
+  text-align: center;
+}
+
 button, input {
   font-family: CalSans;
 }
@@ -21,6 +25,7 @@ button, input {
   grid-row-gap: 0px;
   width: 95vw;
   height: 50vh;
+  padding: 30px;
 }
 
 .alignitemscenter {
@@ -42,4 +47,8 @@ button, input {
   position: absolute;
   width: 100vw;
   height: 100vh;
+}
+
+.sign {
+  padding: 10px;
 }
