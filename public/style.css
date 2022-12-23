@@ -58,6 +58,7 @@ button, input {
   transition-duration: 0.75s;
   transition-timing-function: ease-in;
   height: 300px;
+  padding: 30px;
 }
 
 .lightbox.short {
