@@ -188,7 +188,7 @@
                     // just testing what the JSON is going to look like.
                     data = JSON.parse(data)
                     let currentData = data[currentShowing - 1]
-                    if (currentShowing + 1 > data.length) {
+                    if (data.length == 0) {
                            document.querySelector(".noMessages").style.display = "block"
                            document.querySelector(".areMessages").style.display = "none"
                         
