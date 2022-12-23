@@ -55,7 +55,7 @@ button, input {
 .lightbox {
   overflow: hidden;
   transition-duration: 0.75s;
-  transition-timing-function: cubic-bezier(.27,.67,.85,.35);
+  transition-timing-function: ease-in;
   height: fit-content;
 }
 
@@ -99,4 +99,10 @@ button, input[type="submit"] {
 button:hover, input[type="submit"]:hover {
   box-shadow: 0 0 #8f7ae6;
   transform: translateY(6px)
+}
+
+#close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
