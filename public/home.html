@@ -112,7 +112,9 @@
             });
 
         function openLightbox(gifSrc) {
-            document.querySelector("#lightboxCont").style.display = "flex"
+            document.querySelector(".lightbox").classList.remove("short");
+            document.querySelector("#lightboxCont").style.display = "flex";
+            document.querySelector("body").style.overflow = "hidden";
             document.querySelector("#lightboxCont").classList.add("shown");
             // let friends = getFriendsList()
             document.getElementById('gifShow').src = gifSrc;
@@ -122,6 +124,7 @@
             setTimeout(() => {  
                 document.querySelector("#lightboxCont").classList.remove("shown");
                 document.querySelector("#lightboxCont").style.display = "none";
+                document.querySelector("body").style.overflow = "shown";
              }, 1000);
         }
 
