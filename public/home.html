@@ -14,10 +14,10 @@
 <body>
     <div class="fullpage alignitemscenter">
         <div>
-    <img src="assets/gifify.svg">
+    <img width="150px" src="assets/gifify.svg">
     <form action="/api/requestfriend" method="POST">
         <input type="text" name="receiver" placeholder="username of friend">
-        <input type="submit" name="submit" value="submit">
+        <input type="submit" name="submit" value="request">
     </form>
 
     <!-- gif container -->
@@ -26,10 +26,8 @@
 
     <!-- searchbox -->
     <div id="search-panel">
-        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="write your search term here" oninput="searchAPI()">
+        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="search query" oninput="searchAPI()">
     </div>
-
-    <button onclick="openLightbox()">send message</button>
 
     <button onclick="currentShowing = 0; getMessages()">reload messages</button>
     
