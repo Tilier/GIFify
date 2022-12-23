@@ -114,17 +114,22 @@
         function openLightbox(gifSrc) {
             document.querySelector(".lightbox").classList.remove("short");
             document.querySelector("#lightboxCont").style.display = "flex";
-            document.querySelector("body").style.overflow = "hidden";
-            document.querySelector("#lightboxCont").classList.add("shown");
-            // let friends = getFriendsList()
             document.getElementById('gifShow').src = gifSrc;
+            setTimeout(() => {  
+                document.querySelector("body").style.overflow = "hidden";
+                document.querySelector("#lightboxCont").classList.add("shown");
+             }, 10);
+            
+            
         }
         function closeLightbox() {
             document.querySelector(".lightbox").classList.add("short");
-            setTimeout(() => {  
-                document.querySelector("#lightboxCont").classList.remove("shown");
+            setTimeout(() => {
                 document.querySelector("#lightboxCont").style.display = "none";
+                setTimeout(() => {  
+                    document.querySelector("#lightboxCont").classList.remove("shown");
                 document.querySelector("body").style.overflow = "shown";
+                }, 10);
              }, 1000);
         }
 
