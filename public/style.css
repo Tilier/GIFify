@@ -37,3 +37,9 @@ button, input {
   width: 90vw;
   height: 80vh;
 }
+
+.fullpage {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
