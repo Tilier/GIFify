@@ -3,10 +3,15 @@
   src: url("./assets/CalSans.ttf");
 }
 
+@font-face {
+  font-family: Gopher;
+  src: url("./assets/Gopher-Bold.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
-  font-family: CalSans;
+  font-family: Gopher;
 }
 
 *:not(input) {
@@ -14,7 +19,7 @@
 }
 
 button, input {
-  font-family: CalSans;
+  font-family: Gopher;
 }
 
 .accountpage {
