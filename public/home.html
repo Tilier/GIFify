@@ -49,7 +49,7 @@
     </div>
 
     <div id="lightboxCont" class="fullpage alignitemscenter" style="background: rgb(185, 185, 185); display: none">
-        <h1 id="close" onclick="closeLightbox()">X</h1>
+        <h1 id="close" onclick="closeLightbox(false)">X</h1>
         <div class="lightbox alignitemscenter">
             <div>
                 <div id="sentscreen" style="display: none">
@@ -129,8 +129,10 @@
             
             
         }
-        function closeLightbox() {
+
+        function closeLightbox(sent) {
             document.querySelector(".lightbox").classList.add("short");
+            if (sent) {
             setTimeout(() => {
                 document.querySelector(".lightbox").classList.remove("short");
                 document.querySelector("#sendscreen").style.display = "none";
@@ -143,6 +145,15 @@
                     }, 750)
                 }, 1000);
              }, 1000);
+            } else {
+                setTimeout(() => { 
+                    document.querySelector("#lightboxCont").classList.remove("shown"); 
+                    document.querySelector("body").style.overflow = "visible";
+                    setTimeout(() => {
+                        document.querySelector("#lightboxCont").style.display = "none";
+                    }, 750)
+                }, 1000);
+            }
         }
 
         document.querySelector("#submitform").addEventListener("submit", function(e) {e.preventDefault(); sendGifMessage(e)})
@@ -159,7 +170,7 @@
                 type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
                     console.log("sent!")
-                    closeLightbox()
+                    closeLightbox(true)
                 },
                 error: console.error
             });

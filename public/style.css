@@ -46,6 +46,7 @@ button, input {
 #lightboxCont {
   opacity: 0;
   transition-duration: 0.5s;
+  position: fixed;
 }
 
 #lightboxCont.shown {
