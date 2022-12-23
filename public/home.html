@@ -141,9 +141,9 @@
         }
 
         function showMessages(data) {
+            data = JSON.parse(data)
             if (data.length > 0) {
                 console.log(data)
-                data = JSON.parse(data)
                 let currentData = data[currentShowing]
                 console.log(currentData)
                 document.querySelector(".areMessages").style.display = "block"
