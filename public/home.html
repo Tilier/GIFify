@@ -125,10 +125,10 @@
         function closeLightbox() {
             document.querySelector(".lightbox").classList.add("short");
             setTimeout(() => {
-                document.querySelector("#lightboxCont").style.display = "none";
-                setTimeout(() => {  
-                    document.querySelector("#lightboxCont").classList.remove("shown");
+                document.querySelector("#lightboxCont").classList.remove("shown");
                 document.querySelector("body").style.overflow = "shown";
+                setTimeout(() => {  
+                    document.querySelector("#lightboxCont").style.display = "none";
                 }, 10);
              }, 1000);
         }
