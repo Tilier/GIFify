@@ -132,13 +132,16 @@
         function closeLightbox() {
             document.querySelector(".lightbox").classList.add("short");
             setTimeout(() => {
-                document.querySelector("#lightboxCont").classList.remove("shown");
-                document.querySelector("body").style.overflow = "shown";
-                document.querySelector("#sendscreen").style.display = "none";
-                document.querySelector("#sentscreen").style.display = "block";
-                setTimeout(() => {  
-                    document.querySelector("#lightboxCont").style.display = "none";
-                }, 10);
+                document.querySelector(".lightbox").classList.remove("short");
+                setTimeout(() => { 
+                    document.querySelector("#lightboxCont").classList.remove("shown"); 
+                    document.querySelector("body").style.overflow = "shown";
+                    document.querySelector("#sendscreen").style.display = "none";
+                    document.querySelector("#sentscreen").style.display = "block";
+                    setTimeout(() => {
+                        document.querySelector("#lightboxCont").style.display = "none";
+                    }, 10)
+                }, 1000);
              }, 1000);
         }
 
