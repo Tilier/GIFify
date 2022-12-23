@@ -24,7 +24,7 @@ button, input {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   width: 95vw;
-  height: 50vh;
+  height: calc(100% - 50px);
   padding: 30px;
 }
 
