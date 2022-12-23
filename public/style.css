@@ -108,3 +108,7 @@ button:hover, input[type="submit"]:hover {
   right: 20px;
   cursor: pointer;
 }
+
+input[type="submit"] {
+  top: -3px;
+}
