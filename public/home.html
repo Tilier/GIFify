@@ -116,9 +116,10 @@
         }
         function openLightbox(gifSrc) {
             document.querySelector(".lightbox").classList.add("short");
-            wait(1000);
-            document.querySelector("#lightboxCont").classList.remove("shown");
-            document.querySelector("#lightboxCont").style.display = "none"
+            setTimeout(() => {  
+                document.querySelector("#lightboxCont").classList.remove("shown");
+                document.querySelector("#lightboxCont").style.display = "none";
+             }, 1000);
         }
 
         document.querySelector("#submitform").addEventListener("submit", function(e) {e.preventDefault(); sendGifMessage(e)})
