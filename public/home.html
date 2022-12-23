@@ -52,6 +52,10 @@
         <h1 id="close" onclick="closeLightbox()">X</h1>
         <div class="lightbox alignitemscenter">
             <div>
+                <div id="sentscreen" style="display: none">
+                    <h1>sent!</h1>
+                </div>
+                <div id="sendscreen">
             <h1>send a gif!</h1>
             <img id="gifShow" src="./assets/imagefailed.svg">
             <form id="submitform">
@@ -62,6 +66,7 @@
                 </select>
                 <input type="submit">
             </form>
+            </div>
             </div>
         </div>
     </div>
@@ -114,6 +119,8 @@
         function openLightbox(gifSrc) {
             document.querySelector(".lightbox").classList.remove("short");
             document.querySelector("#lightboxCont").style.display = "flex";
+            document.querySelector("#sendscreen").style.display = "block";
+            document.querySelector("#sentscreen").style.display = "none";
             document.getElementById('gifShow').src = gifSrc;
             setTimeout(() => {  
                 document.querySelector("body").style.overflow = "hidden";
@@ -127,6 +134,8 @@
             setTimeout(() => {
                 document.querySelector("#lightboxCont").classList.remove("shown");
                 document.querySelector("body").style.overflow = "shown";
+                document.querySelector("#sendscreen").style.display = "none";
+                document.querySelector("#sentscreen").style.display = "block";
                 setTimeout(() => {  
                     document.querySelector("#lightboxCont").style.display = "none";
                 }, 10);
