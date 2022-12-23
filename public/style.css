@@ -70,9 +70,18 @@ input[type="text"], input[type="password"] {
 button, input[type="submit"] {
   outline: none;
   border: none;
-  padding: 10px 20px;
+  padding: 7px 20px;
   border-radius: 5px;
-  box-shadow: 0 7px #8f7ae6;
+  box-shadow: 0 6px #8f7ae6;
   background: #B1A0F6;
   color: white;
+  position: relative;
+  top: -3px;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+button:hover, input[type="submit"]:hover {
+  box-shadow: 0 0 #8f7ae6;
+  transform: translateY(6px)
 }
