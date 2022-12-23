@@ -53,7 +53,7 @@ button, input {
 }
 
 .lightbox {
-  overflow: none;
+  overflow: hidden;
   transition-duration: 0.75s;
   transition-timing-function: cubic-bezier(.27,.67,.85,.35);
   height: fit-content;
