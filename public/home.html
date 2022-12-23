@@ -109,10 +109,16 @@
             });
 
         function openLightbox(gifSrc) {
-            document.querySelector("#lightboxCont").style.display = "block"
+            document.querySelector("#lightboxCont").style.display = "flex"
+            document.querySelector("#lightboxCont").classList.add("shown");
             // let friends = getFriendsList()
             document.getElementById('gifShow').src = gifSrc;
-            
+        }
+        function openLightbox(gifSrc) {
+            document.querySelector(".lightbox").classList.add("short");
+            wait(1000);
+            document.querySelector("#lightboxCont").classList.remove("shown");
+            document.querySelector("#lightboxCont").style.display = "none"
         }
 
         document.querySelector("#submitform").addEventListener("submit", function(e) {e.preventDefault(); sendGifMessage(e)})
@@ -129,6 +135,7 @@
                 type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise 
                 success: function(responseData) {
                     console.log("sent!")
+                    closeLightbox()
                 },
                 error: console.error
             });
@@ -155,8 +162,8 @@
                 document.querySelector(".areMessages").style.display = "block"
                 document.querySelector(".noMessages").style.display = "none"
                 document.querySelector(".currentImage").src = currentData["gif"]
-                document.querySelector("caption").innerHTML = currentData["caption"]
-                document.querySelector("sender").innerHTML = currentData["sender"]
+                document.querySelector("#caption").innerHTML = currentData["caption"]
+                document.querySelector("#sender").innerHTML = currentData["sender"]
             } else {
                 document.querySelector(".noMessages").style.display = "block"
                 document.querySelector(".areMessages").style.display = "none"
