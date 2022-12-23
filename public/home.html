@@ -133,14 +133,14 @@
             document.querySelector(".lightbox").classList.add("short");
             setTimeout(() => {
                 document.querySelector(".lightbox").classList.remove("short");
+                document.querySelector("#sendscreen").style.display = "none";
+                document.querySelector("#sentscreen").style.display = "block";
                 setTimeout(() => { 
                     document.querySelector("#lightboxCont").classList.remove("shown"); 
-                    document.querySelector("body").style.overflow = "shown";
-                    document.querySelector("#sendscreen").style.display = "none";
-                    document.querySelector("#sentscreen").style.display = "block";
+                    document.querySelector("body").style.overflow = "visible";
                     setTimeout(() => {
                         document.querySelector("#lightboxCont").style.display = "none";
-                    }, 10)
+                    }, 750)
                 }, 1000);
              }, 1000);
         }
