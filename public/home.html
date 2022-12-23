@@ -131,7 +131,6 @@
         }
 
         function closeLightbox(sent) {
-            document.querySelector(".lightbox").classList.add("short");
             if (sent) {
             setTimeout(() => {
                 document.querySelector(".lightbox").classList.remove("short");
@@ -159,6 +158,7 @@
         document.querySelector("#submitform").addEventListener("submit", function(e) {e.preventDefault(); sendGifMessage(e)})
                                                                     
         function sendGifMessage(e) {
+            document.querySelector(".lightbox").classList.add("short");
             $.ajax({
                 url: "/api/sendgifmessage",
                 data: {
