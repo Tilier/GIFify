@@ -164,7 +164,7 @@
                 document.querySelector(".noMessages").style.display = "none"
                 document.querySelector(".currentImage").src = currentData["gif"]
                 document.querySelector("#caption").innerHTML = currentData["caption"]
-                document.querySelector("#sender").innerHTML = currentData["sender"]
+                document.querySelector("#sender").innerHTML = `from ${currentData["sender"]}`
             } else {
                 document.querySelector(".noMessages").style.display = "block"
                 document.querySelector(".areMessages").style.display = "none"
