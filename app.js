@@ -94,9 +94,11 @@ app.get('/', function (req, res) {
         <link rel="stylesheet" href="style.css">
         <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
       </head>
-      <body>
+      <body class="fullpage alignitemscenter">
+      <div class="message">
         <h3>${message}</h3>
         <a href="/">continue to GIFify</a>
+        </div>
       <script type="module" src="index.js"></script>
       </body>
     </html>
