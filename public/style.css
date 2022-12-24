@@ -117,6 +117,8 @@ input[type="submit"] {
 
 a {
   color: #8f7ae6;
+  display: inline-block;
+  transition-duration: 0.5s;
 }
 
 a:hover {
@@ -127,5 +129,5 @@ a:hover {
   padding: 30px;
   box-shadow: 0 5px 20px 0px #1c222b2e;
   border-radius: 30px;
-  background: white
+  background: white;
 }
